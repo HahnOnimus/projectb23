@@ -187,7 +187,7 @@ function initCounters() {
 function initSharesCounter() {
     const config = {
         total: 200,
-        sold: 153,
+        sold: 1,
         updateInterval: 0 // Set to positive number to enable auto-update
     };
 
