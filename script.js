@@ -187,7 +187,7 @@ function initCounters() {
 function initSharesCounter() {
     const config = {
         total: 200,
-        sold: 1,
+        sold: 30,
         updateInterval: 0 // Set to positive number to enable auto-update
     };
 
@@ -397,3 +397,62 @@ function throttle(func, limit) {
         }
     };
 }
+
+// Waitlist Form Submission with Google Sheets Integration
+document.addEventListener('DOMContentLoaded', function() {
+    const waitlistForm = document.getElementById('waitlistForm');
+    
+    waitlistForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(waitlistForm);
+        const data = {
+            name: formData.get('name'),
+            whatsapp: formData.get('whatsapp'),
+            email: formData.get('email'),
+            timestamp: new Date().toISOString()
+        };
+        
+        // Show loading state
+        const submitBtn = waitlistForm.querySelector('.submit-btn');
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        submitBtn.disabled = true;
+        
+        // Replace with your Google Apps Script Web App URL
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbywen2YBofZH8XT_WH3QpI5AkpaAhTQQasRVnhMymJvxmxtEfuhO6ua6tNGQ1Q3QY0Lgg/exec';
+        
+        // Submit to Google Sheets
+        fetch(scriptURL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(() => {
+            // Show success message
+            waitlistForm.style.display = 'none';
+            
+            const successHTML = `
+                <div class="form-success">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>You're on the list!</h3>
+                    <p>We'll notify you when we launch. Keep an eye on your inbox.</p>
+                    <button onclick="location.reload()" class="submit-btn">
+                        <span class="btn-text">Done</span>
+                    </button>
+                </div>
+            `;
+            
+            document.querySelector('.waitlist-form-container').insertAdjacentHTML('beforeend', successHTML);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Something went wrong. Please try again.');
+            submitBtn.innerHTML = '<span class="btn-text">Join Waitlist</span><span class="btn-icon"><i class="fas fa-arrow-right"></i></span>';
+            submitBtn.disabled = false;
+        });
+    });
+});

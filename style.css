@@ -65,9 +65,9 @@ a {
 }
 
 .section-header .section-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     color: var(--text-secondary);
-    max-width: 700px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -162,8 +162,8 @@ a {
 /* Hero Section */
 .hero {
     min-height: 100vh;
-    background: linear-gradient(135deg, rgba(18, 18, 18, 0.9), rgba(10, 10, 10, 0.95)), 
-                url('fff');
+    background: linear-gradient(135deg, rgba(18, 18, 18, 0.7), rgba(10, 10, 10, 0.7)), 
+                url('./background-one.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -2311,5 +2311,639 @@ a {
     
     .t-number {
         font-size: 2rem;
+    }
+}
+/* Academic Excellence Section */
+.academic-excellence {
+    position: relative;
+    padding: 100px 5%;
+    background: linear-gradient(135deg, #0f0c29, #302b63);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.academic-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+/* University Seal */
+.university-seal {
+    flex: 0 0 300px;
+    position: relative;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.seal-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: float 6s ease-in-out infinite;
+}
+
+.seal-img {
+    width: 18rem;
+    height: 18rem;
+    object-fit: contain;
+    z-index: 2;
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+}
+
+.seal-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 8px solid rgba(255, 215, 0, 0.3);
+    border-radius: 50%;
+    box-shadow: 
+        0 0 60px rgba(255, 215, 0, 0.3),
+        inset 0 0 60px rgba(255, 215, 0, 0.3);
+    animation: pulse 4s ease-in-out infinite;
+}
+
+.seal-shine {
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, transparent 70%);
+    opacity: 0.1;
+    border-radius: 50%;
+}
+
+/* Academic Content */
+.academic-content {
+    flex: 1;
+    color: white;
+}
+
+.academic-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 8px 20px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.academic-badge span {
+    background: linear-gradient(90deg, #FFD700, #FFA500);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.academic-title {
+    font-size: 3rem;
+    margin-bottom: 25px;
+    line-height: 1.2;
+}
+
+.title-line {
+    display: block;
+    color: white;
+}
+
+.title-underline {
+    display: block;
+    color: white;
+    font-size: 20px;
+}
+
+.title-university {
+    display: block;
+    background: linear-gradient(90deg, #FFD700, #FF8C00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 3.5rem;
+    font-weight: 800;
+}
+
+.academic-statement {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    max-width: 700px;
+    color: rgba(255,255,255,0.9);
+}
+
+/* University Highlights */
+.university-highlights {
+    display: flex;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.highlight-item {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.highlight-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 140, 0, 0.2));
+    color: #FFD700;
+    flex-shrink: 0;
+}
+
+.highlight-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.highlight-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #FFD700, #FFA500);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+}
+
+.highlight-label {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.8);
+    margin-top: 5px;
+}
+
+/* Floating Books */
+.floating-book {
+    position: absolute;
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.2);
+    z-index: 1;
+}
+
+.book-1 {
+    top: 20%;
+    left: 5%;
+    animation: float 8s ease-in-out infinite;
+}
+
+.book-2 {
+    bottom: 15%;
+    right: 8%;
+    animation: float 7s ease-in-out infinite reverse;
+}
+
+.book-3 {
+    top: 30%;
+    right: 5%;
+    animation: float 9s ease-in-out infinite 2s;
+}
+
+/* Background Elements */
+.academic-bg-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.bg-element {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.1;
+}
+
+.element-1 {
+    width: 400px;
+    height: 400px;
+    background: #FFD700;
+    top: -100px;
+    left: -100px;
+}
+
+.element-2 {
+    width: 600px;
+    height: 600px;
+    background: #6C63FF;
+    bottom: -200px;
+    right: -200px;
+}
+
+.element-3 {
+    width: 300px;
+    height: 300px;
+    background: #25D366;
+    top: 50%;
+    left: 30%;
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .academic-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .university-seal {
+        margin-bottom: 40px;
+    }
+    
+    .academic-statement {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .university-highlights {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .academic-title {
+        font-size: 2.5rem;
+    }
+    
+    .title-university {
+        font-size: 3rem;
+    }
+    
+    .university-highlights {
+        flex-direction: column;
+    }
+    
+    .highlight-item {
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .academic-title {
+        font-size: 2rem;
+    }
+    
+    .title-university {
+        font-size: 2.2rem;
+    }
+    
+    .academic-statement {
+        font-size: 1rem;
+    }
+}
+.highlight-one{
+    color: var(--primary);
+}
+/* Waitlist Section Styles */
+.waitlist-section {
+    padding: 100px 5%;
+    background: linear-gradient(135deg, #0f0c29, #1a1a2e);
+    position: relative;
+    overflow: hidden;
+}
+
+.waitlist-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    position: relative;
+    z-index: 2;
+}
+
+.waitlist-visuals {
+    flex: 1;
+    position: relative;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.visual-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.15;
+}
+
+.circle-1 {
+    width: 300px;
+    height: 300px;
+    background: #6C63FF;
+    top: 20%;
+    left: 10%;
+    animation: float 8s ease-in-out infinite;
+}
+
+.circle-2 {
+    width: 400px;
+    height: 400px;
+    background: #FFC107;
+    bottom: 10%;
+    right: 10%;
+    animation: float 10s ease-in-out infinite reverse;
+}
+
+.circle-3 {
+    width: 200px;
+    height: 200px;
+    background: #25D366;
+    top: 60%;
+    left: 30%;
+    animation: float 7s ease-in-out infinite 2s;
+}
+
+.waitlist-icon {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: #6C63FF;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.icon-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(108, 99, 255, 0.2);
+    animation: pulse 3s infinite;
+    z-index: -1;
+}
+
+.waitlist-form-container {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+
+.form-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.form-header p {
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+.waitlist-form {
+    display: grid;
+    gap: 25px;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: rgba(255,255,255,0.9);
+    font-weight: 500;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper i {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,0.7);
+}
+
+.waitlist-form input {
+    width: 100%;
+    padding: 15px 20px 15px 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.waitlist-form input:focus {
+    outline: none;
+    border-color: #6C63FF;
+    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.3);
+}
+
+.waitlist-form input::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+.submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 18px 30px;
+    background: linear-gradient(90deg, #6C63FF, #8B5CF6);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+}
+
+.submit-btn .btn-icon {
+    transition: transform 0.3s ease;
+}
+
+.submit-btn:hover .btn-icon {
+    transform: translateX(5px);
+}
+
+.waitlist-benefits {
+    display: flex;
+    gap: 20px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 15px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.benefit-item i {
+    color: #6C63FF;
+}
+
+.benefit-item span {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.9rem;
+}
+
+/* Success Message */
+.form-success {
+    display: none;
+    text-align: center;
+    padding: 30px;
+}
+
+.form-success i {
+    font-size: 4rem;
+    color: #25D366;
+    margin-bottom: 20px;
+}
+
+.form-success h3 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.form-success p {
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 30px;
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    70% {
+        transform: scale(1.1);
+        opacity: 0.1;
+    }
+    100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .waitlist-container {
+        flex-direction: column;
+    }
+    
+    .waitlist-visuals {
+        min-height: 300px;
+        margin-bottom: 40px;
+    }
+    
+    .waitlist-form-container {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-header h2 {
+        font-size: 2rem;
+    }
+    
+    .waitlist-benefits {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .waitlist-form-container {
+        padding: 30px 20px;
+    }
+    
+    .form-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .submit-btn {
+        padding: 15px 20px;
     }
 }
