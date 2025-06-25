@@ -25,14 +25,14 @@
             <li><a href="#projections">Projections</a></li>
             <li><a href="#team">Team</a></li>
             <li><a href="#testimonials">Testimonials</a></li>
-            <li><a href="#invest">Pre-Order</a></li>
+            <li><a class="active-nav-link" href="#invest">Pre-Order</a></li>
         </ul>
     </nav>
 
 <!-- Updated Hero Section -->
 <header id="home" class="hero">
     <div class="hero-content">
-        <h1><span class="gradient-text">Business Visibility</span> as a Service</h1>
+        <h1><span class="gradient-text">Business Visibility as a Service</span></h1>
         <p class="hero-subtitle">
             <span class="bold-stroke">Pioneering The Next Billion Dollar Tech Ecosystem</span>
             <span class="ai-driven">with AI-driven growth</span>
@@ -239,8 +239,8 @@ It’s clear: traditional marketing is too expensive, digital advertising is too
             </div>
             <div class="opportunity-card">
                 <div class="card-icon"><i class="fas fa-globe-africa"></i></div>
-                <h3>African Expansion</h3>
-                <p>Designed for rapid scaling across Nigeria and pan-African markets</p>
+                <h3>Scalable Expansion</h3>
+                <p>Designed for rapid scaling across global and emerging markets</p>
             </div>
         </div>
     </section>
@@ -329,7 +329,7 @@ It’s clear: traditional marketing is too expensive, digital advertising is too
     <!-- Financial Projections -->
     <section id="projections" class="financial-projections">
         <div class="section-header">
-            <h2>Aggressive <span class="gradient-text">Growth</span> Projections</h2>
+            <h2>Scalable <span class="gradient-text">Growth</span> Projections</h2>
             <p class="section-subtitle">Clear path to profitability and investor returns</p>
         </div>
         
@@ -387,9 +387,7 @@ It’s clear: traditional marketing is too expensive, digital advertising is too
             </div>
         </div>
         
-        <div class="projection-chart">
-            <canvas id="revenueChart"></canvas>
-        </div>
+        
     </section>
 
     <!-- Competitive Advantage -->
@@ -458,35 +456,35 @@ It’s clear: traditional marketing is too expensive, digital advertising is too
         
         <div class="timeline">
             <div class="timeline-item">
-                <div class="timeline-date">Q3 2024</div>
+                <div class="timeline-date">Q3 2025</div>
                 <div class="timeline-content">
                     <h3>Product Launch</h3>
                     <p>Full platform launch with all core features</p>
                 </div>
             </div>
             <div class="timeline-item">
-                <div class="timeline-date">Q4 2024</div>
+                <div class="timeline-date">Q1 2026</div>
                 <div class="timeline-content">
                     <h3>1,000 Customers</h3>
                     <p>Achieve first 1,000 paying customers</p>
                 </div>
             </div>
             <div class="timeline-item">
-                <div class="timeline-date">Q1 2025</div>
+                <div class="timeline-date">Q1/Q2 2026</div>
                 <div class="timeline-content">
                     <h3>Profitability</h3>
                     <p>Reach positive cash flow</p>
                 </div>
             </div>
             <div class="timeline-item">
-                <div class="timeline-date">Q2 2025</div>
+                <div class="timeline-date">Q2 2026</div>
                 <div class="timeline-content">
                     <h3>International Expansion</h3>
                     <p>Register Delaware LLC for global operations</p>
                 </div>
             </div>
             <div class="timeline-item">
-                <div class="timeline-date">Q4 2025</div>
+                <div class="timeline-date">Q3 2026</div>
                 <div class="timeline-content">
                     <h3>4,000 Customers/Month</h3>
                     <p>Scale to 4,000 new customers monthly</p>
@@ -495,6 +493,83 @@ It’s clear: traditional marketing is too expensive, digital advertising is too
         </div>
     </section>
 
+    <!-- Add this section after the Financial Projections section in your HTML -->
+<section id="financial-projections" class="financial-projections-chart">
+    <div class="section-header">
+        <h2>5-Year <span class="gradient-text">Financial</span> Projections</h2>
+        <p class="section-subtitle">Clear trajectory to profitability and investor returns</p>
+    </div>
+    
+    <div class="projections-container">
+        <!-- Chart Container -->
+        <div class="chart-container">
+            <canvas id="financialChart"></canvas>
+        </div>
+        
+        <!-- Key Metrics -->
+        <div class="key-metrics">
+            <div class="metric-card">
+                <div class="metric-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="metric-content">
+                    <span class="metric-value" id="revenueGrowth">0%</span>
+                    <span class="metric-label">CAGR Revenue Growth</span>
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-icon">
+                    <i class="fas fa-coins"></i>
+                </div>
+                <div class="metric-content">
+                    <span class="metric-value" id="profitMargin">0%</span>
+                    <span class="metric-label">Year 5 Profit Margin</span>
+                </div>
+            </div>
+            
+            <div class="metric-card highlight">
+                <div class="metric-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="metric-content">
+                    <span class="metric-value" id="totalRevenue">$0</span>
+                    <span class="metric-label">Cumulative Revenue</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Projection Details -->
+    <div class="projection-details">
+        <div class="detail-card">
+            <h3><i class="fas fa-money-bill-wave"></i> Revenue Drivers</h3>
+            <ul>
+                <li>Subscription growth at 40% YoY</li>
+                <li>Credit system adoption at 35% of revenue</li>
+                <li>Premium features contributing 25%</li>
+            </ul>
+        </div>
+        
+        <div class="detail-card">
+            <h3><i class="fas fa-cogs"></i> Cost Structure</h3>
+            <ul>
+                <li>Declining customer acquisition costs</li>
+                <li>Economies of scale in operations</li>
+                <li>AI-driven efficiency gains</li>
+            </ul>
+        </div>
+        
+        <div class="detail-card highlight">
+            <h3><i class="fas fa-lightbulb"></i> Key Insights</h3>
+            <ul>
+                <li>Positive cash flow by Year 2</li>
+                <li>70%+ gross margins maintained</li>
+                <li>Scalable model with high operating leverage</li>
+            </ul>
+        </div>
+    </div>
+</section>
 
 
     <!-- Academic Excellence Section -->
@@ -585,7 +660,7 @@ It’s clear: traditional marketing is too expensive, digital advertising is too
     <!-- Team Section -->
     <section id="team" class="team-section">
         <div class="section-header">
-            <h2>World-Class <span class="gradient-text">Founding</span> Team</h2>
+            <h2>Our <span class="gradient-text">World-Class</span> Team</h2>
             <p class="section-subtitle">Seasoned professionals with proven track records</p>
         </div>
         
@@ -681,33 +756,11 @@ It’s clear: traditional marketing is too expensive, digital advertising is too
     <div class="shares-container">
         <div class="shares-content">
             <div class="shares-header">
-                <h3>Support Development with Founder's Package Pre-Orders</h3>
-                <h2>Only <span class="shares-remaining">47</span> Founder Packages Left</h2>
+                <h3>Pre-order Founder's Package</h3>
+                <h2>Only <span class="shares-remaining">200</span> Left</h2>
                 <p class="urgency-note">Claim the chance to convert your support into heavily discounted equity once we launch!</p>
             </div>
             
-            <div class="shares-visual">
-                <div class="shares-progress">
-                    <div class="progress-bar" style="width: 83%">
-                        <span class="progress-text">83% Funded</span>
-                    </div>
-                </div>
-                
-                <div class="shares-stats">
-                    <div class="stat-item">
-                        <span class="stat-number">200</span>
-                        <span class="stat-label">Total Pre-orders Available</span>
-                    </div>
-                    <div class="stat-item highlight">
-                        <span class="stat-number">153</span>
-                        <span class="stat-label">Total Pre-orders Sold</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">47</span>
-                        <span class="stat-label">Total Remaining Pre-orders</span>
-                    </div>
-                </div>
-            </div>
             
         </div>
     </div>
@@ -730,10 +783,10 @@ It’s clear: traditional marketing is too expensive, digital advertising is too
                     <div class="tier-price">₦200,000</div>
                 </div>
                 <ul class="tier-benefits">
-                    <li><i class="fas fa-check"></i> 1% Equity Stake</li>
-                    <li><i class="fas fa-check"></i> Board Observer Rights</li>
-                    <li><i class="fas fa-check"></i> Priority Liquidity</li>
-                    <li><i class="fas fa-check"></i> Quarterly Investor Updates</li>
+                    <li></i> 1% Equity Stake</li>
+                    <li></i> Board Observer Rights</li>
+                    <li></i> Priority Liquidity</li>
+                    <li></i> Quarterly Investor Updates</li>
                 </ul>
                 <a href="#" class="invest-now">Claim Now</a>
             </div>
@@ -743,13 +796,12 @@ It’s clear: traditional marketing is too expensive, digital advertising is too
                     <div class="tier-price">₦500,000</div>
                 </div>
                 <ul class="tier-benefits">
-                    <li><i class="fas fa-check"></i> 2½ Equity Stake</li>
-                    <li><i class="fas fa-check"></i> Board Seat</li>
-                    <li><i class="fas fa-check"></i> First Right of Refusal</li>
-                    <li><i class="fas fa-check"></i> Monthly Investor Updates</li>
-                    <li><i class="fas fa-check"></i> Advisory Role</li>
+                    <li></i> 2½ Equity Stake</li>
+                    <li></i> Board Seat</li>
+                    <li></i> First Right of Refusal</li>
+                    <li></i> Advisory Role</li>
                 </ul>
-                <a href="#" class="invest-now">Invest Now</a>
+                <a href="#" class="invest-now">Claim Now</a>
                 <div class="featured-badge">RECOMMENDED</div>
             </div>
             <div class="tier-card">
@@ -758,13 +810,12 @@ It’s clear: traditional marketing is too expensive, digital advertising is too
                     <div class="tier-price">₦1,000,000</div>
                 </div>
                 <ul class="tier-benefits">
-                    <li><i class="fas fa-check"></i> 5%+ Equity Stake</li>
-                    <li><i class="fas fa-check"></i> Multiple Board Seats</li>
-                    <li><i class="fas fa-check"></i> Custom Investment Terms</li>
-                    <li><i class="fas fa-check"></i> Weekly Investor Updates</li>
-                    <li><i class="fas fa-check"></i> Strategic Partnership</li>
+                    <li></i> 5%+ Equity Stake</li>
+                    <li></i> Custom Investment Terms</li>
+                    <li></i> Weekly Investor Updates</li>
+                    <li></i> Strategic Partnership</li>
                 </ul>
-                <a href="#" class="invest-now">Invest Now</a>
+                <a href="#" class="invest-now">Claim Now</a>
             </div>
         </div>
         
@@ -862,8 +913,6 @@ It’s clear: traditional marketing is too expensive, digital advertising is too
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#opportunity">Opportunity</a></li>
-                    <li><a href="#revenue">Revenue Model</a></li>
-                    <li><a href="#projections">Projections</a></li>
                     <li><a href="#team">Team</a></li>
                 </ul>
             </div>
@@ -871,9 +920,8 @@ It’s clear: traditional marketing is too expensive, digital advertising is too
                 <h4>Legal</h4>
                 <ul>
                     <li><a href="#">Terms</a></li>
-                    <li><a href="#">Privacy</a></li>
                     <li><a href="#">Disclosures</a></li>
-                    <li><a href="#">Investor Agreement</a></li>
+                    <li><a href="#">Agreement</a></li>
                 </ul>
             </div>
         </div>

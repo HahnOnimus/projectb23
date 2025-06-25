@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
     initNavbar();
     initTestimonials();
     initCounters();
-    initSharesCounter();
-    initRevenueChart();
     initRevenueCircle();
     initAnimations();
+    initFinancialChart();
+
 });
 
 // ==================== COMPONENT INITIALIZERS ==================== //
@@ -181,133 +181,6 @@ function initCounters() {
     }
 }
 
-/**
- * Initialize shares counter with manual control
- */
-function initSharesCounter() {
-    const config = {
-        total: 200,
-        sold: 30,
-        updateInterval: 0 // Set to positive number to enable auto-update
-    };
-
-    const elements = {
-        remaining: document.querySelector('.shares-remaining'),
-        sold: document.querySelector('.shares-stats .stat-item:nth-child(2) .stat-number'),
-        total: document.querySelector('.shares-stats .stat-item:first-child .stat-number'),
-        progressBar: document.querySelector('.progress-bar')
-    };
-
-    let remaining = config.total - config.sold;
-    let sold = config.sold;
-
-    // Initial setup
-    updateSharesDisplay();
-
-    // Auto-update if enabled
-    if (config.updateInterval > 0) {
-        setInterval(() => {
-            if (sold < config.total) {
-                sold++;
-                remaining = config.total - sold;
-                updateSharesDisplay();
-            }
-        }, config.updateInterval);
-    }
-
-    // Manual control function
-    window.updateSharesManually = (newSold, newRemaining = null) => {
-        sold = Math.min(newSold, config.total);
-        if (newRemaining !== null) {
-            sold = config.total - newRemaining;
-        }
-        remaining = config.total - sold;
-        updateSharesDisplay();
-    };
-
-    function updateSharesDisplay() {
-        elements.total.textContent = config.total;
-        elements.sold.textContent = sold;
-        elements.remaining.textContent = remaining;
-        
-        // Update progress bar
-        const percentage = Math.floor((sold / config.total) * 100);
-        elements.progressBar.style.width = percentage + '%';
-        elements.progressBar.querySelector('.progress-text').textContent = percentage + '% Funded';
-        
-        // Visual effects
-        if (remaining <= 10) {
-            elements.remaining.classList.add('blink');
-            elements.remaining.classList.remove('pulse');
-            document.querySelector('.shares-stats .stat-item.highlight .stat-number').classList.add('pulse');
-        } else {
-            elements.remaining.classList.remove('blink');
-            elements.remaining.classList.add('pulse');
-        }
-    }
-}
-
-/**
- * Initialize revenue chart
- */
-function initRevenueChart() {
-    const ctx = document.getElementById('revenueChart')?.getContext('2d');
-    if (!ctx) return;
-    
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Year 1', 'Year 2', 'Year 3'],
-            datasets: [{
-                label: 'Projected Revenue (Millions)',
-                data: [0.6, 2.4, 6],
-                backgroundColor: 'rgba(108, 99, 255, 0.2)',
-                borderColor: 'rgba(108, 99, 255, 1)',
-                borderWidth: 3,
-                tension: 0.4,
-                pointBackgroundColor: 'rgba(255, 193, 7, 1)',
-                pointRadius: 6,
-                pointHoverRadius: 8
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    labels: {
-                        color: 'rgba(255,255,255,0.9)',
-                        font: {
-                            family: 'Montserrat',
-                            size: 14
-                        }
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        color: 'rgba(255,255,255,0.7)',
-                        callback: function(value) {
-                            return '$' + value;
-                        }
-                    },
-                    grid: {
-                        color: 'rgba(255,255,255,0.1)'
-                    }
-                },
-                x: {
-                    ticks: {
-                        color: 'rgba(255,255,255,0.7)'
-                    },
-                    grid: {
-                        color: 'rgba(255,255,255,0.1)'
-                    }
-                }
-            }
-        }
-    });
-}
 
 /**
  * Initialize revenue circle visualization
@@ -456,3 +329,166 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+// Add this to your script.js file
+function initFinancialChart() {
+    const ctx = document.getElementById('financialChart').getContext('2d');
+    
+    // Financial data for 5 years
+    const years = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'];
+    const revenue = [606000, 2400000, 6000000, 12000000, 20000000];
+    const costs = [424200, 1440000, 3000000, 5400000, 8000000];
+    const profit = revenue.map((rev, i) => rev - costs[i]);
+    
+    // Calculate metrics for display
+    const revenueGrowth = Math.round(((revenue[4] / revenue[0]) ** (1/4) - 1) * 100);
+    const profitMargin = Math.round((profit[4] / revenue[4]) * 100);
+    const totalRevenue = revenue.reduce((acc, curr) => acc + curr, 0);
+    
+    // Format total revenue for display
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    });
+    
+    const chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: years,
+            datasets: [
+                {
+                    label: 'Revenue',
+                    data: revenue,
+                    backgroundColor: 'rgba(108, 99, 255, 0.8)',
+                    borderColor: 'rgba(108, 99, 255, 1)',
+                    borderWidth: 1,
+                    borderRadius: 5,
+                    borderSkipped: false
+                },
+                {
+                    label: 'Costs',
+                    data: costs,
+                    backgroundColor: 'rgba(255, 107, 107, 0.8)',
+                    borderColor: 'rgba(255, 107, 107, 1)',
+                    borderWidth: 1,
+                    borderRadius: 5,
+                    borderSkipped: false
+                },
+                {
+                    label: 'Profit',
+                    data: profit,
+                    backgroundColor: 'rgba(37, 211, 102, 0.8)',
+                    borderColor: 'rgba(37, 211, 102, 1)',
+                    borderWidth: 1,
+                    borderRadius: 5,
+                    borderSkipped: false
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        color: 'rgba(255,255,255,0.9)',
+                        font: {
+                            family: 'Montserrat',
+                            size: 14
+                        },
+                        padding: 20
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(18, 18, 28, 0.95)',
+                    titleColor: 'rgba(255,255,255,0.9)',
+                    bodyColor: 'rgba(255,255,255,0.8)',
+                    borderColor: 'rgba(108, 99, 255, 0.5)',
+                    borderWidth: 1,
+                    padding: 15,
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += formatter.format(context.parsed.y);
+                            }
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        color: 'rgba(255,255,255,0.1)',
+                        drawBorder: false
+                    },
+                    ticks: {
+                        color: 'rgba(255,255,255,0.8)',
+                        font: {
+                            family: 'Montserrat',
+                            weight: '600'
+                        }
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(255,255,255,0.1)',
+                        drawBorder: false
+                    },
+                    ticks: {
+                        color: 'rgba(255,255,255,0.8)',
+                        font: {
+                            family: 'Montserrat',
+                            weight: '600'
+                        },
+                        callback: function(value) {
+                            if (value >= 1000000) {
+                                return '$' + (value / 1000000) + 'M';
+                            } else if (value >= 1000) {
+                                return '$' + (value / 1000) + 'K';
+                            }
+                            return '$' + value;
+                        }
+                    }
+                }
+            },
+            animation: {
+                duration: 2000,
+                onComplete: function() {
+                    // Update metric values with animation
+                    animateValue(document.getElementById('revenueGrowth'), 0, revenueGrowth, 2000);
+                    animateValue(document.getElementById('profitMargin'), 0, profitMargin, 2000);
+                    animateValue(document.getElementById('totalRevenue'), 0, totalRevenue, 2000, formatter);
+                }
+            }
+        }
+    });
+}
+
+// Helper function to animate values
+function animateValue(element, start, end, duration, formatter = null) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const value = Math.floor(progress * (end - start) + start);
+        
+        if (formatter) {
+            element.innerHTML = formatter.format(value);
+        } else {
+            element.innerHTML = value + '%';
+        }
+        
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
