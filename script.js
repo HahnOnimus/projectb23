@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initRevenueCircle();
     initAnimations();
     initFinancialChart();
+    addSVGGradients();
+    initCountdown();
 
 });
 
@@ -525,3 +527,156 @@ function animateValue(element, start, end, duration, formatter = null) {
     };
     window.requestAnimationFrame(step);
 }
+
+// Countdown Timer
+function initCountdown() {
+    // Target date: July 30, 2025
+    const targetDate = new Date('July 30, 2025 00:00:00').getTime();
+    
+    // Get countdown elements
+    const daysElement = document.getElementById('countdown-days');
+    const hoursElement = document.getElementById('countdown-hours');
+    const minutesElement = document.getElementById('countdown-minutes');
+    const secondsElement = document.getElementById('countdown-seconds');
+    const progressCircles = document.querySelectorAll('.circle-progress');
+    
+    // Calculate circumference for progress circles (2πr)
+    const circumference = 2 * Math.PI * 45;
+    
+    // Update countdown every second
+    const countdown = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+        
+        // Time calculations
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        // Display results
+        daysElement.textContent = days.toString().padStart(2, '0');
+        hoursElement.textContent = hours.toString().padStart(2, '0');
+        minutesElement.textContent = minutes.toString().padStart(2, '0');
+        secondsElement.textContent = seconds.toString().padStart(2, '0');
+        
+        // Update progress circles
+        const totalHoursInDay = 24;
+        const totalMinutesInHour = 60;
+        const totalSecondsInMinute = 60;
+        
+        // Calculate dash offsets based on time remaining
+        progressCircles[0].style.setProperty('--dash-offset', circumference - (days % 100 / 100) * circumference);
+        progressCircles[1].style.setProperty('--dash-offset', circumference - (hours / totalHoursInDay) * circumference);
+        progressCircles[2].style.setProperty('--dash-offset', circumference - (minutes / totalMinutesInHour) * circumference);
+        progressCircles[3].style.setProperty('--dash-offset', circumference - (seconds / totalSecondsInMinute) * circumference);
+        
+        // If countdown is finished
+        if (distance < 0) {
+            clearInterval(countdown);
+            daysElement.textContent = '00';
+            hoursElement.textContent = '00';
+            minutesElement.textContent = '00';
+            secondsElement.textContent = '00';
+        }
+    }, 1000);
+}
+
+// Add SVG gradients (place this in your HTML before the closing </body> tag)
+function addSVGGradients() {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("width", "0");
+    svg.setAttribute("height", "0");
+    svg.style.position = "absolute";
+    
+    // Gradient for days
+    const gradient1 = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
+    gradient1.setAttribute("id", "gradient1");
+    gradient1.setAttribute("x1", "0%");
+    gradient1.setAttribute("y1", "0%");
+    gradient1.setAttribute("x2", "100%");
+    gradient1.setAttribute("y2", "100%");
+    
+    const stop1 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+    stop1.setAttribute("offset", "0%");
+    stop1.setAttribute("stop-color", "#6C63FF");
+    
+    const stop2 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+    stop2.setAttribute("offset", "100%");
+    stop2.setAttribute("stop-color", "#FFC107");
+    
+    gradient1.appendChild(stop1);
+    gradient1.appendChild(stop2);
+    
+    // Gradient for hours
+    const gradient2 = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
+    gradient2.setAttribute("id", "gradient2");
+    gradient2.setAttribute("x1", "0%");
+    gradient2.setAttribute("y1", "100%");
+    gradient2.setAttribute("x2", "100%");
+    gradient2.setAttribute("y2", "0%");
+    
+    const stop3 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+    stop3.setAttribute("offset", "0%");
+    stop3.setAttribute("stop-color", "#FFC107");
+    
+    const stop4 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+    stop4.setAttribute("offset", "100%");
+    stop4.setAttribute("stop-color", "#6C63FF");
+    
+    gradient2.appendChild(stop3);
+    gradient2.appendChild(stop4);
+    
+    // Gradient for minutes
+    const gradient3 = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
+    gradient3.setAttribute("id", "gradient3");
+    gradient3.setAttribute("x1", "0%");
+    gradient3.setAttribute("y1", "0%");
+    gradient3.setAttribute("x2", "100%");
+    gradient3.setAttribute("y2", "0%");
+    
+    const stop5 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+    stop5.setAttribute("offset", "0%");
+    stop5.setAttribute("stop-color", "#6C63FF");
+    
+    const stop6 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+    stop6.setAttribute("offset", "100%");
+    stop6.setAttribute("stop-color", "#25D366");
+    
+    gradient3.appendChild(stop5);
+    gradient3.appendChild(stop6);
+    
+    // Gradient for seconds
+    const gradient4 = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
+    gradient4.setAttribute("id", "gradient4");
+    gradient4.setAttribute("x1", "100%");
+    gradient4.setAttribute("y1", "0%");
+    gradient4.setAttribute("x2", "0%");
+    gradient4.setAttribute("y2", "100%");
+    
+    const stop7 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+    stop7.setAttribute("offset", "0%");
+    stop7.setAttribute("stop-color", "#25D366");
+    
+    const stop8 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+    stop8.setAttribute("offset", "100%");
+    stop8.setAttribute("stop-color", "#FFC107");
+    
+    gradient4.appendChild(stop7);
+    gradient4.appendChild(stop8);
+    
+    const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+    defs.appendChild(gradient1);
+    defs.appendChild(gradient2);
+    defs.appendChild(gradient3);
+    defs.appendChild(gradient4);
+    svg.appendChild(defs);
+    
+    document.body.appendChild(svg);
+}
+
+// Initialize countdown when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    addSVGGradients();
+    initCountdown();
+});
