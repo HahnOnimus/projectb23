@@ -136,7 +136,10 @@ a {
 .active-nav-link{
     font-weight: 600;
     font-size: 1.1rem;
-    color: var(--secondary);
+    color: var(--gray);
+    background-color: var(--secondary);
+    padding: 0.5rem;
+    border-radius: 0.50rem;
     position: relative;
 }
 
