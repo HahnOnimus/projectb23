@@ -66,82 +66,115 @@ function initNavbar() {
     });
 }
 
+
 /**
- * Initialize testimonial carousel
+ * Initialize testimonial carousel with auto-sliding
  */
 function initTestimonials() {
-    const testimonials = [
-        {
-            image: 'https://i.pravatar.cc/150?img=5',
-            text: '"The most compelling investment opportunity I\'ve seen in Nigeria\'s tech space."',
-            name: 'Emmanuel Okafor',
-            role: 'Serial Investor'
-        },
-        {
-            image: 'https://i.pravatar.cc/150?img=3',
-            text: '"BVaaS has consistently exceeded projections. Their credit system ensures sustainable growth."',
-            name: 'Ibrahim Yusuf',
-            role: 'Venture Capitalist'
-        },
-        {
-            image: 'https://i.pravatar.cc/150?img=1',
-            text: '"The first-mover advantage is real. I\'ve already seen 3x return on my investment."',
-            name: 'Oluwaseun Adebayo',
-            role: 'Angel Investor'
-        }
-    ];
-
-    let currentTestimonial = 0;
-    const testimonialContainer = document.querySelector('.testimonial-slider');
-    const prevButton = document.querySelector('.slider-prev');
-    const nextButton = document.querySelector('.slider-next');
-
-    // Create testimonial elements
-    testimonials.forEach((testimonial, index) => {
-        const testimonialEl = document.createElement('div');
-        testimonialEl.className = `testimonial ${index === 0 ? 'active' : ''}`;
-        testimonialEl.innerHTML = `
-            <div class="testimonial-content">
-                <p>${testimonial.text}</p>
-                <div class="testimonial-author">
-                    <img src="${testimonial.image}" alt="${testimonial.name}">
-                    <div>
-                        <h4>${testimonial.name}</h4>
-                        <p>${testimonial.role}</p>
-                    </div>
-                </div>
-            </div>
-        `;
-        testimonialContainer.appendChild(testimonialEl);
+    const carousel = document.querySelector('.testimonial-carousel');
+    const cards = document.querySelectorAll('.testimonial-card');
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+    const dotsContainer = document.querySelector('.carousel-dots');
+    
+    // Create dots
+    cards.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('carousel-dot');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
     });
-
-    // Navigation controls
-    prevButton.addEventListener('click', () => {
-        currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
-        updateTestimonials();
-    });
-
-    nextButton.addEventListener('click', () => {
-        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-        updateTestimonials();
-    });
-
-    // Auto-rotation
-    const rotateInterval = setInterval(() => {
-        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-        updateTestimonials();
-    }, 5000);
-
-    function updateTestimonials() {
-        const testimonialsElements = document.querySelectorAll('.testimonial');
-        testimonialsElements.forEach((testimonial, index) => {
-            testimonial.classList.remove('active');
-            if (index === currentTestimonial) {
-                testimonial.classList.add('active');
-            }
+    
+    const dots = document.querySelectorAll('.carousel-dot');
+    let currentIndex = 0;
+    let autoSlideInterval;
+    const slideDuration = 5000; // 5 seconds
+    
+    // Set card width based on viewport
+    function setCardWidth() {
+        const cardWidth = window.innerWidth <= 768 ? 
+            (window.innerWidth <= 480 ? '100%' : '50%') : '33.333%';
+        cards.forEach(card => {
+            card.style.flex = `0 0 calc(${cardWidth} - 20px)`;
         });
     }
+    
+    // Go to specific slide
+    function goToSlide(index) {
+        currentIndex = (index + cards.length) % cards.length;
+        const scrollPosition = cards[currentIndex].offsetLeft - carousel.offsetLeft;
+        carousel.scrollTo({
+            left: scrollPosition,
+            behavior: 'smooth'
+        });
+        updateDots();
+    }
+    
+    // Update active dot
+    function updateDots() {
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+    }
+    
+    // Next slide
+    function nextSlide() {
+        goToSlide(currentIndex + 1);
+    }
+    
+    // Previous slide
+    function prevSlide() {
+        goToSlide(currentIndex - 1);
+    }
+    
+    // Start auto sliding
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(nextSlide, slideDuration);
+    }
+    
+    // Stop auto sliding
+    function stopAutoSlide() {
+        clearInterval(autoSlideInterval);
+    }
+    
+    // Event listeners
+    prevBtn.addEventListener('click', () => {
+        prevSlide();
+        stopAutoSlide();
+        startAutoSlide();
+    });
+    
+    nextBtn.addEventListener('click', () => {
+        nextSlide();
+        stopAutoSlide();
+        startAutoSlide();
+    });
+    
+    // Update current index on scroll
+    carousel.addEventListener('scroll', () => {
+        const scrollPosition = carousel.scrollLeft + carousel.offsetWidth / 2;
+        cards.forEach((card, index) => {
+            if (card.offsetLeft <= scrollPosition && 
+                card.offsetLeft + card.offsetWidth > scrollPosition) {
+                currentIndex = index;
+                updateDots();
+            }
+        });
+    });
+    
+    // Pause auto slide on hover
+    carousel.addEventListener('mouseenter', stopAutoSlide);
+    carousel.addEventListener('mouseleave', startAutoSlide);
+    
+    // Initialize
+    setCardWidth();
+    startAutoSlide();
+    
+    // Handle window resize
+    window.addEventListener('resize', setCardWidth);
 }
+
 
 /**
  * Initialize all animated counters
