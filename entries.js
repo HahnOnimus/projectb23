@@ -25,6 +25,6 @@ const transactionsData = [
         referralID: 'Mano107',
         method: 'Paystack (Card Payment)',
         package: 'Gold Founder\'s Package',
-        benefits: '5+ equity conversion opportunity, Custom Investment Terms'
+        benefits: '5 equity conversion opportunity, Custom Investment Terms'
     }
 ];
