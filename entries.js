@@ -7,7 +7,7 @@ const transactionsData = [
         referralID: 'Mano107',
         method: 'Paystack (Card Payment)',
         package: 'Silver Founder\'s Package',
-        benefits: '2.5% equity conversion opportunity, Board Seat, First Right of Refusal'
+        benefits: '2.5 equity conversion opportunity, Board Seat, First Right of Refusal'
     },
     {
         id: 'T123456789012345',
@@ -16,7 +16,7 @@ const transactionsData = [
         referralID: 'Mano107',
         method: 'Paystack (Bank Transfer)',
         package: 'Bronze Founder\'s Package',
-        benefits: '1% equity conversion opportunity, Board Observer Rights'
+        benefits: '1 equity conversion opportunity, Board Observer Rights'
     },
     {
         id: 'T987654321098765',
@@ -25,6 +25,6 @@ const transactionsData = [
         referralID: 'Mano107',
         method: 'Paystack (Card Payment)',
         package: 'Gold Founder\'s Package',
-        benefits: '5%+ equity conversion opportunity, Custom Investment Terms'
+        benefits: '5+ equity conversion opportunity, Custom Investment Terms'
     }
 ];
