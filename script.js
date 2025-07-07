@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initFinancialChart();
     addSVGGradients();
     initCountdown();
+    showPieChart();
+    tabSection();
 
 });
 
@@ -72,6 +74,90 @@ function initNavbar() {
 /**
  * Initialize testimonial carousel with auto-sliding
  */
+
+function showPieChart(){
+    const pieChart = document.getElementById('vcPieChart');
+        if (pieChart) {
+            pieChart.style.transform = 'scale(0)';
+            setTimeout(() => {
+                pieChart.style.transition = 'transform 1s ease-out';
+                pieChart.style.transform = 'scale(1)';
+            }, 500);
+        }
+
+        // Growth graph animation
+        const growthGraph = document.getElementById('growthGraph');
+        if (growthGraph) {
+            // This would be replaced with a real chart library in production
+            growthGraph.innerHTML = `
+                <svg viewBox="0 0 500 300" width="100%" height="100%">
+                    <path d="M0,250 L100,200 L200,150 L300,50 L400,100 L500,0" 
+                          stroke="url(#growthGradient)" 
+                          stroke-width="4" 
+                          fill="none" 
+                          stroke-linecap="round"
+                          stroke-dasharray="1000"
+                          stroke-dashoffset="1000" />
+                    <defs>
+                        <linearGradient id="growthGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#6C63FF" />
+                            <stop offset="100%" stop-color="#FFC107" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            `;
+            
+            setTimeout(() => {
+                const path = growthGraph.querySelector('path');
+                path.style.transition = 'stroke-dashoffset 2s ease-out';
+                path.style.strokeDashoffset = '0';
+            }, 1000);
+        }
+}
+
+function tabSection(){
+    const tabBtns = document.querySelectorAll('.et-tab-btn');
+        const examples = document.querySelectorAll('.et-example');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons and examples
+                tabBtns.forEach(b => b.classList.remove('active'));
+                examples.forEach(ex => ex.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Show corresponding example
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(`${tabId}-example`).classList.add('active');
+                
+                // Animate bars
+                animateBars();
+            });
+        });
+        
+        // Animate bars on load
+        setTimeout(() => {
+            animateBars();
+        }, 500);
+        
+        function animateBars() {
+            const activeExample = document.querySelector('.et-example.active');
+            if (activeExample) {
+                const bars = activeExample.querySelectorAll('.ete-bar');
+                bars.forEach(bar => {
+                    const height = bar.style.height;
+                    bar.style.height = '0';
+                    setTimeout(() => {
+                        bar.style.transition = 'height 1s ease-out';
+                        bar.style.height = height;
+                    }, 100);
+                });
+            }
+        }
+}
+
 function initTestimonials() {
     const carousel = document.querySelector('.testimonial-carousel');
     const cards = document.querySelectorAll('.testimonial-card');
