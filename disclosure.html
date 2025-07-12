@@ -10,7 +10,6 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     
     <style>
-        /* Base Styles */
         :root {
             --primary: #6C63FF;
             --primary-dark: #4834d4;
@@ -52,7 +51,6 @@
             padding: 0 20px;
         }
 
-        /* Verification Page Specific Styles */
         .verification-page {
             padding: 80px 0 100px;
         }
@@ -74,7 +72,6 @@
             margin: 0 auto;
         }
 
-        /* Search Section */
         .search-section {
             background: rgba(30, 30, 40, 0.7);
             border-radius: 15px;
@@ -231,7 +228,6 @@
             z-index: 1;
         }
 
-        /* Certificate Card */
         .certificate-card {
             display: none;
             background: linear-gradient(135deg, rgba(20, 20, 40, 0.9), rgba(10, 10, 30, 0.95));
@@ -380,10 +376,11 @@
         .download-certificate i {
             margin-right: 8px;
         }
-         .capture-mode {
-            background: #0a0a15 !important; /* Solid background for capture */
+
+        .capture-mode {
+            background: #0a0a15 !important;
         }
-        /* Transactions Table */
+
         .transactions-section {
             margin-top: 60px;
         }
@@ -526,7 +523,6 @@
                 <h1>Payment <span class="gradient-text">Verification</span></h1>
                 <p>Verify your BVaaS pre-order payment using your transaction reference ID. Note that these transactions are publicly available for transparency.</p>
             </header>
-
             <div class="search-section">
                 <form class="search-form" id="verificationForm">
                     <input type="text" class="search-input" id="paymentId" placeholder="Enter your payment reference (e.g. T797832922442593)" required>
@@ -678,11 +674,10 @@
             const verificationCard = document.getElementById('verificationCard');
             const certificateCard = document.getElementById('certificateCard');
             
-            // Hide both cards initially
             verificationCard.classList.remove('active');
             certificateCard.classList.remove('active');
             
-            // Find the transaction
+          
             const transaction = transactionsData.find(t => t.id.toUpperCase() === paymentId);
             
             if (transaction) {
@@ -719,7 +714,6 @@
             const transaction = transactionsData.find(t => t.id.toUpperCase() === transactionId.toUpperCase());
             
             if (transaction) {
-                // Update certificate with transaction details
                 document.getElementById('certificateId').textContent = transaction.id;
                 document.getElementById('certificateAmount').textContent = transaction.amount;
                 document.getElementById('certificateDate').textContent = transaction.date;
