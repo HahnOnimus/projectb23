@@ -2769,7 +2769,7 @@ a {
 .shares-header h2 {
     font-size: 3.5rem;
     margin-bottom: 10px;
-    background: linear-gradient(90deg, #FFC107, #FF8C00);
+    background: #fff;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
