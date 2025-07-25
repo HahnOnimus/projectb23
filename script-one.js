@@ -1,27 +1,11 @@
-/**
- * BVaaS - Main JavaScript File
- * Contains all interactive components for the investment platform
- */
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all components
-    initNavbar();
-    initTestimonials();
-    initCounters();
-    initRevenueCircle();
     initAnimations();
-    initFinancialChart();
     addSVGGradients();
+    initCountdown();
     showPieChart();
     tabSection();
-
 });
 
-// ==================== COMPONENT INITIALIZERS ==================== //
-
-/**
- * Initialize navbar functionality
- */
 function initNavbar() {
     // Scroll behavior
     let lastScrollY = window.scrollY;
@@ -391,206 +375,6 @@ function throttle(func, limit) {
     };
 }
 
-// Waitlist Form Submission with Google Sheets Integration
-document.addEventListener('DOMContentLoaded', function() {
-    const waitlistForm = document.getElementById('waitlistForm');
-    
-    waitlistForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(waitlistForm);
-        const data = {
-            name: formData.get('name'),
-            whatsapp: formData.get('whatsapp'),
-            email: formData.get('email'),
-            timestamp: new Date().toISOString()
-        };
-        
-        // Show loading state
-        const submitBtn = waitlistForm.querySelector('.submit-btn');
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-        submitBtn.disabled = true;
-        
-        // Replace with your Google Apps Script Web App URL
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbywen2YBofZH8XT_WH3QpI5AkpaAhTQQasRVnhMymJvxmxtEfuhO6ua6tNGQ1Q3QY0Lgg/exec';
-        
-        // Submit to Google Sheets
-        fetch(scriptURL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-        .then(() => {
-            // Show success message
-            waitlistForm.style.display = 'none';
-            
-            const successHTML = `
-                <div class="form-success">
-                    <i class="fas fa-check-circle"></i>
-                    <h3>You're on the list!</h3>
-                    <p>We'll notify you when we launch. Keep an eye on your inbox.</p>
-                    <button onclick="location.reload()" class="submit-btn">
-                        <span class="btn-text">Done</span>
-                    </button>
-                </div>
-            `;
-            
-            document.querySelector('.waitlist-form-container').insertAdjacentHTML('beforeend', successHTML);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Something went wrong. Please try again.');
-            submitBtn.innerHTML = '<span class="btn-text">Join Waitlist</span><span class="btn-icon"><i class="fas fa-arrow-right"></i></span>';
-            submitBtn.disabled = false;
-        });
-    });
-});
-// Add this to your script.js file
-function initFinancialChart() {
-    const ctx = document.getElementById('financialChart').getContext('2d');
-    
-    // Financial data for 5 years
-    const years = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'];
-    const revenue = [606000, 2400000, 6000000, 12000000, 20000000];
-    const costs = [424200, 1440000, 3000000, 5400000, 8000000];
-    const profit = revenue.map((rev, i) => rev - costs[i]);
-    
-    // Calculate metrics for display
-    const revenueGrowth = Math.round(((revenue[4] / revenue[0]) ** (1/4) - 1) * 100);
-    const profitMargin = Math.round((profit[4] / revenue[4]) * 100);
-    const totalRevenue = revenue.reduce((acc, curr) => acc + curr, 0);
-    
-    // Format total revenue for display
-    const formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
-    });
-    
-    const chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: years,
-            datasets: [
-                {
-                    label: 'Revenue',
-                    data: revenue,
-                    backgroundColor: 'rgba(108, 99, 255, 0.8)',
-                    borderColor: 'rgba(108, 99, 255, 1)',
-                    borderWidth: 1,
-                    borderRadius: 5,
-                    borderSkipped: false
-                },
-                {
-                    label: 'Costs',
-                    data: costs,
-                    backgroundColor: 'rgba(255, 107, 107, 0.8)',
-                    borderColor: 'rgba(255, 107, 107, 1)',
-                    borderWidth: 1,
-                    borderRadius: 5,
-                    borderSkipped: false
-                },
-                {
-                    label: 'Profit',
-                    data: profit,
-                    backgroundColor: 'rgba(37, 211, 102, 0.8)',
-                    borderColor: 'rgba(37, 211, 102, 1)',
-                    borderWidth: 1,
-                    borderRadius: 5,
-                    borderSkipped: false
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'top',
-                    labels: {
-                        color: 'rgba(255,255,255,0.9)',
-                        font: {
-                            family: 'Montserrat',
-                            size: 14
-                        },
-                        padding: 20
-                    }
-                },
-                tooltip: {
-                    backgroundColor: 'rgba(18, 18, 28, 0.95)',
-                    titleColor: 'rgba(255,255,255,0.9)',
-                    bodyColor: 'rgba(255,255,255,0.8)',
-                    borderColor: 'rgba(108, 99, 255, 0.5)',
-                    borderWidth: 1,
-                    padding: 15,
-                    callbacks: {
-                        label: function(context) {
-                            let label = context.dataset.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            if (context.parsed.y !== null) {
-                                label += formatter.format(context.parsed.y);
-                            }
-                            return label;
-                        }
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    grid: {
-                        color: 'rgba(255,255,255,0.1)',
-                        drawBorder: false
-                    },
-                    ticks: {
-                        color: 'rgba(255,255,255,0.8)',
-                        font: {
-                            family: 'Montserrat',
-                            weight: '600'
-                        }
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        color: 'rgba(255,255,255,0.1)',
-                        drawBorder: false
-                    },
-                    ticks: {
-                        color: 'rgba(255,255,255,0.8)',
-                        font: {
-                            family: 'Montserrat',
-                            weight: '600'
-                        },
-                        callback: function(value) {
-                            if (value >= 1000000) {
-                                return '$' + (value / 1000000) + 'M';
-                            } else if (value >= 1000) {
-                                return '$' + (value / 1000) + 'K';
-                            }
-                            return '$' + value;
-                        }
-                    }
-                }
-            },
-            animation: {
-                duration: 2000,
-                onComplete: function() {
-                    // Update metric values with animation
-                    animateValue(document.getElementById('revenueGrowth'), 0, revenueGrowth, 2000);
-                    animateValue(document.getElementById('profitMargin'), 0, profitMargin, 2000);
-                    animateValue(document.getElementById('totalRevenue'), 0, totalRevenue, 2000, formatter);
-                }
-            }
-        }
-    });
-}
 
 // Helper function to animate values
 function animateValue(element, start, end, duration, formatter = null) {
@@ -613,7 +397,59 @@ function animateValue(element, start, end, duration, formatter = null) {
     window.requestAnimationFrame(step);
 }
 
-
+// Countdown Timer
+function initCountdown() {
+    // Target date: August 15, 2025
+    const targetDate = new Date('August 15, 2025 00:00:00').getTime();
+    
+    // Get countdown elements
+    const daysElement = document.getElementById('countdown-days');
+    const hoursElement = document.getElementById('countdown-hours');
+    const minutesElement = document.getElementById('countdown-minutes');
+    const secondsElement = document.getElementById('countdown-seconds');
+    const progressCircles = document.querySelectorAll('.circle-progress');
+    
+    // Calculate circumference for progress circles (2πr)
+    const circumference = 2 * Math.PI * 45;
+    
+    // Update countdown every second
+    const countdown = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+        
+        // Time calculations
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        // Display results
+        daysElement.textContent = days.toString().padStart(2, '0');
+        hoursElement.textContent = hours.toString().padStart(2, '0');
+        minutesElement.textContent = minutes.toString().padStart(2, '0');
+        secondsElement.textContent = seconds.toString().padStart(2, '0');
+        
+        // Update progress circles
+        const totalHoursInDay = 24;
+        const totalMinutesInHour = 60;
+        const totalSecondsInMinute = 60;
+        
+        // Calculate dash offsets based on time remaining
+        progressCircles[0].style.setProperty('--dash-offset', circumference - (days % 100 / 100) * circumference);
+        progressCircles[1].style.setProperty('--dash-offset', circumference - (hours / totalHoursInDay) * circumference);
+        progressCircles[2].style.setProperty('--dash-offset', circumference - (minutes / totalMinutesInHour) * circumference);
+        progressCircles[3].style.setProperty('--dash-offset', circumference - (seconds / totalSecondsInMinute) * circumference);
+        
+        // If countdown is finished
+        if (distance < 0) {
+            clearInterval(countdown);
+            daysElement.textContent = '00';
+            hoursElement.textContent = '00';
+            minutesElement.textContent = '00';
+            secondsElement.textContent = '00';
+        }
+    }, 1000);
+}
 
 // Add SVG gradients (place this in your HTML before the closing </body> tag)
 function addSVGGradients() {
@@ -711,4 +547,5 @@ function addSVGGradients() {
 // Initialize countdown when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     addSVGGradients();
+    initCountdown();
 });

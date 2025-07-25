@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BVaaS - Pre-Order Now</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./logo.png" type="image/png">
+    <style>
+        /* New Hero Section Styles */
+        .preorder-hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0c29, #1a1a2e);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .hero-container {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, #6C63FF, #FFC107);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .bold-stroke {
+            font-weight: 300;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .bold-stroke::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #6C63FF, #FFC107);
+            transform: scaleX(0.8);
+            opacity: 0.7;
+        }
+        
+        .ai-driven {
+            font-weight: 600;
+            background: #FFC107;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        
+        /* Animated Background Elements */
+        .hero-bg-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.1;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .shape-1 {
+            width: 600px;
+            height: 600px;
+            background: #6C63FF;
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+        
+        .shape-2 {
+            width: 800px;
+            height: 800px;
+            background: #FFC107;
+            bottom: -200px;
+            right: -200px;
+            animation-delay: 5s;
+            animation-duration: 20s;
+        }
+        
+        .shape-3 {
+            width: 400px;
+            height: 400px;
+            background: #25D366;
+            top: 50%;
+            left: 30%;
+            animation-delay: 10s;
+            animation-duration: 12s;
+        }
+        
+        /* Particle Animation */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.8) 0%, transparent 100%),
+                radial-gradient(3px 3px at 40% 70%, rgba(255,255,255,0.6) 0%, transparent 100%),
+                radial-gradient(2px 2px at 60% 20%, rgba(255,255,255,0.7) 0%, transparent 100%),
+                radial-gradient(3px 3px at 80% 50%, rgba(255,255,255,0.5) 0%, transparent 100%),
+                radial-gradient(2px 2px at 30% 80%, rgba(255,255,255,0.6) 0%, transparent 100%);
+            background-size: 200px 200px;
+            animation: particles 15s linear infinite;
+            z-index: 1;
+        }
+        
+        /* Glass Morphism Effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(108, 99, 255, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            margin-top: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(20px, 20px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(-20px, -20px); }
+        }
+        
+        @keyframes particles {
+            0% { background-position: 0% 0%, 20% 40%, 40% 10%, 60% 30%, 80% 70%; }
+            100% { background-position: 100% 100%, 120% 140%, 140% 110%, 160% 130%, 180% 170%; }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .glass-card {
+                padding: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .glass-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="dark-theme">
+<!-- Stunning New Hero Section -->
+    <header id="home" class="preorder-hero">
+        <div class="hero-bg-elements">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+            <div class="particles"></div>
+        </div>
+        
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">What If You Could Own a Piece of the Next Million-Dollar Company Before It Launches?</h1>
+                <div class="glass-card">
+                    <p class="hero-subtitle">
+                        <span class="bold-stroke">Through our exclusive preorder campaign, businesses like yours can secure lifetime ownership before the world even sees what’s coming.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Add this right after the hero section -->
+<section class="shares-counter">
+    <div class="shares-container">
+        <div class="shares-content">
+            <div class="shares-header">
+                <p class="urgency-note">In every breakout startup story, the biggest winners are always the ones who got in early. Think of Facebook’s first angel investors, who turned a $25,000 check into hundreds of millions. Or Airbnb’s earliest supporters who believed before the world caught on and cashed out big when it did. These aren’t just stories of timing; they’re stories of vision. That’s the kind of rare opportunity Project B23 is offering to forward-thinking businesses right now.
+Our preorder campaign is your chance to secure exclusive lifetime ownership before we go live, before the masses, and before the market explodes. With a 90% equity conversion discount locked in for preorder holders, this is more than early access, it’s a front-row seat to the next big digital wave. You’re not just signing up; you’re positioning your brand at the foundation of a platform designed to scale globally.
+With projected revenues exceeding $100,000 (₦150 million) monthly, pre-order holders stand to earn up to $2,000 (₦3 million) per month in lifetime ROI, all from a small, one-time preorder fee. This isn’t theory; it’s strategy. The kind that has built empires. The only question is: "will your business be watching from the sidelines, or sitting at the table when it happens?"</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="invest" class="investment-section-one">
+        <div class="section-header">
+            <h3><span class="gradient-text">Limited Time Left to Pre-Order</span></h3>
+        </div>
+</section>
+
+<!-- Countdown Section -->
+<section class="countdown-section">    
+    <div class="countdown-container">
+        <div class="countdown-item">
+            <div class="countdown-number" id="countdown-days"></div>
+            <div class="countdown-label">Days</div>
+            <div class="countdown-circle">
+                <svg viewBox="0 0 100 100">
+                    <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
+                    <circle class="circle-progress" cx="50" cy="50" r="45"></circle>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="countdown-item">
+            <div class="countdown-number" id="countdown-hours"></div>
+            <div class="countdown-label">Hours</div>
+            <div class="countdown-circle">
+                <svg viewBox="0 0 100 100">
+                    <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
+                    <circle class="circle-progress" cx="50" cy="50" r="45"></circle>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="countdown-item">
+            <div class="countdown-number" id="countdown-minutes"></div>
+            <div class="countdown-label">Minutes</div>
+            <div class="countdown-circle">
+                <svg viewBox="0 0 100 100">
+                    <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
+                    <circle class="circle-progress" cx="50" cy="50" r="45"></circle>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="countdown-item">
+            <div class="countdown-number" id="countdown-seconds"></div>
+            <div class="countdown-label">Seconds</div>
+            <div class="countdown-circle">
+                <svg viewBox="0 0 100 100">
+                    <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
+                    <circle class="circle-progress" cx="50" cy="50" r="45"></circle>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Investment Section -->
+    <section id="invest" class="investment-section">
+        <div class="section-header">
+            <h2>Claim your <span class="gradient-text">Pre-order</span> Package</h2>
+            <p class="section-subtitle">Only 200 units, then Its Gone Forever!.</p>
+        </div>
+        
+        <div class="investment-tiers">
+    <div class="tier-card">
+        <div class="tier-header">
+            <h3>Bronze</h3>
+            <div class="tier-price">₦200,000</div>
+        </div>
+        <ul class="tier-benefits">
+            <li>1 equity conversion opportunity up to 90% discount*</li>
+            <li>Potential lifetime ROI of up to ₦500k per month*</li>
+            <li>Full product access for 3 months post-launch</li>
+            <li>Exclusive Founder’s Badge and Ownership Certificate</li>
+        </ul>
+        <a href="https://paystack.com/pay/lnr1ad6idn" class="invest-now">Claim Now</a>
+        <small class="disclaimer">
+            *Equity conversion subject to final terms and approvals. Returns not guaranteed.
+        </small>
+    </div>
+    <div class="tier-card featured">
+        <div class="tier-header">
+            <h3>Silver</h3>
+            <div class="tier-price">₦500,000</div>
+        </div>
+        <ul class="tier-benefits">
+            <li>2.5 equity conversion opportunity up to 90% discount*</li>
+            <li>Potential lifetime ROI of up to ₦500k per month*</li>
+            <li>Full product access for 3 months post-launch</li>
+            <li>Exclusive Founder’s Badge and Ownership Certificate</li>
+        </ul>
+        <a href="https://paystack.shop/pay/39hpdfxifb" class="invest-now">Claim Now</a>
+        <div class="featured-badge">RECOMMENDED</div>
+        <small class="disclaimer">
+            *Equity conversion subject to final terms and approvals. Returns not guaranteed.
+        </small>
+    </div>
+    <div class="tier-card">
+        <div class="tier-header">
+            <h3>Gold</h3>
+            <div class="tier-price">₦1,000,000</div>
+        </div>
+        <ul class="tier-benefits">
+            <li>5 equity conversion opportunity up to 90% discount*</li>
+            <li>Potential lifetime ROI of up to ₦500k per month*</li>
+            <li>Full product access for 3 months post-launch</li>
+            <li>Exclusive Founder’s Badge and Ownership Certificate</li>
+        </ul>
+        <a href="https://paystack.shop/pay/5xlxfbp9rA" class="invest-now">Claim Now</a>
+        <small class="disclaimer">
+            *Equity conversion subject to final terms and approvals. Returns not guaranteed.
+        </small>
+    </div>
+</div>
+
+        
+        <div class="investment-cta">
+            <p>These pre-orders do NOT constitute investments or securities. Funds received will be used solely to develop the company and its products. Pre-ordering grants a future option to convert into equity at a heavily discounted rate, subject to final terms, approvals, and applicable laws. No returns or ownership rights are guaranteed at this stage. By completing a purchase, you agree to be bound by our <a href="./terms.html" style="text-decoration: underline;">terms and conditions</a>.</p>
+        </div>
+    </section>
+
+<section id="equity-conversion" class="equity-conversion-section">
+    <!-- Animated Background Elements -->
+    <div class="ec-bg-elements">
+        <div class="ec-bg-circle circle-1"></div>
+        <div class="ec-bg-circle circle-2"></div>
+        <div class="ec-bg-circle circle-3"></div>
+        <div class="ec-bg-particles"></div>
+    </div>
+
+    <div class="container">
+        <div class="section-header">
+            <h2>Pre-order <span class="gradient-text">Conversion To Equity</span> Breakdown</h2>
+            <p class="section-subtitle">Imagine once the product is fully developed and the company begins issuing equity under the following conditions:</p>
+        </div>
+
+        <!-- Company Valuation Card -->
+        <div class="valuation-card">
+            <div class="vc-content">
+                <div class="vc-main">
+                    <h3>Equity Offering</h3>
+                    <div class="vc-stats">
+                        <div class="vc-stat">
+                            <div class="vc-stat-label">Total Raise</div>
+                            <div class="vc-stat-value">₦100 Million</div>
+                        </div>
+                        <div class="vc-stat">
+                            <div class="vc-stat-label">For Ownership</div>
+                            <div class="vc-stat-value">30%</div>
+                        </div>
+                        <div class="vc-stat">
+                            <div class="vc-stat-label">Company Valuation</div>
+                            <div class="vc-stat-value">₦333 Million</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="vc-shares">
+                    <div class="vc-shares-grid">
+                        <div class="vc-share-item">
+                            <div class="vc-share-label">Total Shares Offered</div>
+                            <div class="vc-share-value">500</div>
+                        </div>
+                        <div class="vc-share-item highlight">
+                            <div class="vc-share-label">Price Per Share</div>
+                            <div class="vc-share-value">₦200,000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vc-visual">
+                <div class="vc-pie-chart" id="vcPieChart"></div>
+                <div class="vc-chart-center">
+                    <span>30%</span>
+                    <small>Equity Offered</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Equity Conversion Explanation -->
+        <div class="ec-explanation">
+            <div class="ece-header">
+                <h3>What Are <span class="gradient-text">Equity Conversion Slots?</span></h3>
+                <p>Each slot gives you the right to buy shares at up to <strong>90% discount</strong> to the official price</p>
+            </div>
+            <div class="ece-visual">
+                <div class="ece-comparison">
+                    <div class="ece-price original">
+                        <div class="ece-price-label">Official Price</div>
+                        <div class="ece-price-value">₦200,000</div>
+                        <div class="ece-price-per">per share</div>
+                    </div>
+                    <div class="ece-arrow">
+                        <i class="fas fa-long-arrow-alt-right"></i>
+                    </div>
+                    <div class="ece-price discounted">
+                        <div class="ece-price-label">Your Price</div>
+                        <div class="ece-price-value">₦20,000</div>
+                        <div class="ece-price-per">per share</div>
+                    </div>
+                </div>
+                <div class="ece-savings">
+                    <div class="ece-savings-value">90% OFF</div>
+                    <div class="ece-savings-label">Your Discount</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why This Matters -->
+        <div class="ec-cta">
+            <div class="eccta-content">
+                <h3>Why This <span class="gradient-text">Matters</span></h3>
+                <p>Your preorder gives you early equity slots and steep discounts, boosting your investment potential in BVaaS.</p>
+
+                <div class="eccta-benefits">
+                    <div class="eccta-benefit">
+                        <div class="eccta-benefit-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="eccta-benefit-content">
+                            <h4>Massive Upside</h4>
+                            <p>Up to 3× Monthly ROI, with massive returns potential.</p>
+                        </div>
+                    </div>
+                    <div class="eccta-benefit">
+                        <div class="eccta-benefit-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="eccta-benefit-content">
+                            <h4>Exclusive Discount</h4>
+                            <p>Convert at ₦20,000/share instead of ₦200,000 - up to 90%</p>
+                        </div>
+                    </div>
+                    <div class="eccta-benefit">
+                        <div class="eccta-benefit-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <div class="eccta-benefit-content">
+                            <h4>Preferred Rights</h4>
+                            <p>Opportunity to convert your preorder into equity before others.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="eccta-visual">
+                <div class="eccta-graph" id="growthGraph"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="equity-examples">
+    <div class="container">
+        <div class="section-header">
+            <h2>Equity Conversion <span class="gradient-text">Examples</span></h2>
+            <p class="section-subtitle">See exactly how your pre-order translates into potential equity value, should you decide to convert.</p>
+        </div>
+
+        <!-- Example Tabs -->
+        <div class="example-tabs">
+            <div class="et-tab-header">
+                <button class="et-tab-btn active" data-tab="bronze">Bronze</button>
+                <button class="et-tab-btn" data-tab="silver">Silver</button>
+                <button class="et-tab-btn" data-tab="gold">Gold</button>
+            </div>
+            
+            <div class="et-tab-content">
+                <!-- Bronze Example -->
+                <div class="et-example active" id="bronze-example">
+                    <div class="ete-visual">
+                        <div class="ete-calculation">
+                            <div class="ete-step">
+                                <div class="ete-step-label">Your Investment</div>
+                                <div class="ete-step-value">₦200,000</div>
+                            </div>
+                            <div class="ete-arrow">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="ete-step highlight">
+                                <div class="ete-step-label">Slot Conversion</div>
+                                <div class="ete-step-value">1 Slot = 10 Shares</div>
+                            </div>
+                            <div class="ete-arrow">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="ete-step">
+                                <div class="ete-step-label">Discounted Price</div>
+                                <div class="ete-step-value">₦20,000/share</div>
+                            </div>
+                            <div class="ete-arrow">
+                                <i class="fas fa-equals"></i>
+                            </div>
+                            <div class="ete-result">
+                                <div class="ete-result-label">Potential Equity Value</div>
+                                <div class="ete-result-value">₦2,000,000</div>
+                                <div class="ete-result-multiplier">10X Value</div>
+                            </div>
+                        </div>
+                        <div class="ete-graph">
+                            <div class="ete-bar" style="height: 40%;" data-value="200000">
+                                <div class="ete-bar-label">Your Investment</div>
+                                <div class="ete-bar-amount">₦200K</div>
+                            </div>
+                            <div class="ete-bar highlight" style="height: 100%;" data-value="2000000">
+                                <div class="ete-bar-label">Potential Value</div>
+                                <div class="ete-bar-amount">₦2M</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ete-details">
+                        <h3>Bronze Founder Breakdown</h3>
+                        <ul class="ete-detail-list">
+                            <li>
+                                <i class="fas fa-calculator"></i>
+                                <span><strong>Calculation:</strong> ₦200,000 ÷ ₦20,000/share = 10 shares</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-chart-line"></i>
+                                <span><strong>At official price:</strong> 10 shares × ₦200,000 = ₦2,000,000</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-gem"></i>
+                                <span><strong>You save:</strong> ₦1,800,000 (90% discount)</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-percentage"></i>
+                                <span><strong>Equity stake:</strong> ~0.6% of company (10/500 shares)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Silver Example -->
+                <div class="et-example" id="silver-example">
+                    <div class="ete-visual">
+                        <div class="ete-calculation">
+                            <div class="ete-step">
+                                <div class="ete-step-label">Your Investment</div>
+                                <div class="ete-step-value">₦500,000</div>
+                            </div>
+                            <div class="ete-arrow">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="ete-step highlight">
+                                <div class="ete-step-label">Slot Conversion</div>
+                                <div class="ete-step-value">2.5 Slots = 25 Shares</div>
+                            </div>
+                            <div class="ete-arrow">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="ete-step">
+                                <div class="ete-step-label">Discounted Price</div>
+                                <div class="ete-step-value">₦20,000/share</div>
+                            </div>
+                            <div class="ete-arrow">
+                                <i class="fas fa-equals"></i>
+                            </div>
+                            <div class="ete-result">
+                                <div class="ete-result-label">Potential Equity Value</div>
+                                <div class="ete-result-value">₦5,000,000</div>
+                                <div class="ete-result-multiplier">10X Value</div>
+                            </div>
+                        </div>
+                        <div class="ete-graph">
+                            <div class="ete-bar" style="height: 20%;" data-value="500000">
+                                <div class="ete-bar-label">Your Investment</div>
+                                <div class="ete-bar-amount">₦500K</div>
+                            </div>
+                            <div class="ete-bar highlight" style="height: 100%;" data-value="5000000">
+                                <div class="ete-bar-label">Potential Value</div>
+                                <div class="ete-bar-amount">₦5M</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ete-details">
+                        <h3>Silver Founder Breakdown</h3>
+                        <ul class="ete-detail-list">
+                            <li>
+                                <i class="fas fa-calculator"></i>
+                                <span><strong>Calculation:</strong> ₦500,000 ÷ ₦20,000/share = 25 shares</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-chart-line"></i>
+                                <span><strong>At official price:</strong> 25 shares × ₦200,000 = ₦5,000,000</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-gem"></i>
+                                <span><strong>You save:</strong> ₦4,500,000 (90% discount)</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-percentage"></i>
+                                <span><strong>Equity stake:</strong> ~1.5% of company (25/500 shares)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Gold Example -->
+                <div class="et-example" id="gold-example">
+                    <div class="ete-visual">
+                        <div class="ete-calculation">
+                            <div class="ete-step">
+                                <div class="ete-step-label">Your Investment</div>
+                                <div class="ete-step-value">₦1,000,000</div>
+                            </div>
+                            <div class="ete-arrow">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="ete-step highlight">
+                                <div class="ete-step-label">Slot Conversion</div>
+                                <div class="ete-step-value">5 Slots = 50 Shares</div>
+                            </div>
+                            <div class="ete-arrow">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="ete-step">
+                                <div class="ete-step-label">Discounted Price</div>
+                                <div class="ete-step-value">₦20,000/share</div>
+                            </div>
+                            <div class="ete-arrow">
+                                <i class="fas fa-equals"></i>
+                            </div>
+                            <div class="ete-result">
+                                <div class="ete-result-label">Potential Equity Value</div>
+                                <div class="ete-result-value">₦10,000,000</div>
+                                <div class="ete-result-multiplier">10X Value</div>
+                            </div>
+                        </div>
+                        <div class="ete-graph">
+                            <div class="ete-bar" style="height: 10%;" data-value="1000000">
+                                <div class="ete-bar-label">Your Investment</div>
+                                <div class="ete-bar-amount">₦1M</div>
+                            </div>
+                            <div class="ete-bar highlight" style="height: 100%;" data-value="10000000">
+                                <div class="ete-bar-label">Potential Value</div>
+                                <div class="ete-bar-amount">₦10M</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ete-details">
+                        <h3>Gold Founder Breakdown</h3>
+                        <ul class="ete-detail-list">
+                            <li>
+                                <i class="fas fa-calculator"></i>
+                                <span><strong>Calculation:</strong> ₦1,000,000 ÷ ₦20,000/share = 50 shares</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-chart-line"></i>
+                                <span><strong>At official price:</strong> 50 shares × ₦200,000 = ₦10,000,000</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-gem"></i>
+                                <span><strong>You save:</strong> ₦9,000,000 (90% discount)</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-percentage"></i>
+                                <span><strong>Equity stake:</strong> ~3% of company (50/500 shares)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script-one.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.hero-title, .glass-card');
+            
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 300);
+            });
+            document.addEventListener('mousemove', (e) => {
+                const particles = document.querySelector('.particles');
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                particles.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
+            });
+        });
+    </script>
+</body>
+</html>
