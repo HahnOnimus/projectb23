@@ -3,6 +3,138 @@
  * Contains all interactive components for the investment platform
  */
 
+const firebaseConfig = {
+  apiKey: "AIzaSyB-B95F56p2Bt_gPCqOylI8eHbqsXykx8Q",
+  authDomain: "bvaas-a8e2a.firebaseapp.com",
+  projectId: "bvaas-a8e2a",
+  storageBucket: "bvaas-a8e2a.firebasestorage.app",
+  messagingSenderId: "67529406573",
+  appId: "1:67529406573:web:c3b516b49e502e5ca8a764",
+  measurementId: "G-LG68D058SN"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+
+// Waitlist Form Submission with Firebase
+document.addEventListener('DOMContentLoaded', function() {
+    const waitlistForm = document.getElementById('waitlistForm');
+    
+    if (waitlistForm) {
+        waitlistForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(waitlistForm);
+            const data = {
+                name: formData.get('name'),
+                whatsapp: formData.get('whatsapp'),
+                email: formData.get('email').toLowerCase(),
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                status: 'pending',
+                source: 'website'
+            };
+            
+            // Show loading state
+            const submitBtn = waitlistForm.querySelector('.submit-btn');
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Check if email already exists
+                const emailQuery = await db.collection('waitlist')
+                    .where('email', '==', data.email)
+                    .limit(1)
+                    .get();
+                
+                if (!emailQuery.empty) {
+                    // Email already exists
+                    showWaitlistMessage('You\'re already on our waitlist!', 'success');
+                    return;
+                }
+                
+                // Check if WhatsApp number already exists
+                const whatsappQuery = await db.collection('waitlist')
+                    .where('whatsapp', '==', data.whatsapp)
+                    .limit(1)
+                    .get();
+                
+                if (!whatsappQuery.empty) {
+                    // WhatsApp number already exists
+                    showWaitlistMessage('This WhatsApp number is already registered.', 'info');
+                    return;
+                }
+                
+                // Add new waitlist entry
+                await db.collection('waitlist').add(data);
+                
+                // Show success message
+                showWaitlistMessage('You\'re on the list! We\'ll notify you when we launch.', 'success');
+                
+            } catch (error) {
+                console.error('Error adding to waitlist:', error);
+                showWaitlistMessage('Something went wrong. Please try again.', 'error');
+                submitBtn.innerHTML = '<span class="btn-text">Join Waitlist</span><span class="btn-icon"><i class="fas fa-arrow-right"></i></span>';
+                submitBtn.disabled = false;
+            }
+        });
+    }
+});
+
+function showWaitlistMessage(message, type = 'success') {
+    const waitlistForm = document.getElementById('waitlistForm');
+    const formContainer = document.querySelector('.waitlist-form-container');
+    
+    if (!waitlistForm || !formContainer) return;
+    
+    // Hide the form
+    waitlistForm.style.display = 'none';
+    
+    // Determine icon and color based on message type
+    let icon, color;
+    switch (type) {
+        case 'success':
+            icon = 'fa-check-circle';
+            color = '#25D366';
+            break;
+        case 'info':
+            icon = 'fa-info-circle';
+            color = '#FFC107';
+            break;
+        case 'error':
+            icon = 'fa-exclamation-circle';
+            color = '#FF6B6B';
+            break;
+        default:
+            icon = 'fa-check-circle';
+            color = '#25D366';
+    }
+    
+    // Create success message HTML
+    const messageHTML = `
+        <div class="form-message" style="text-align: center;">
+            <i class="fas ${icon}" style="font-size: 3rem; color: ${color}; margin-bottom: 1.5rem;"></i>
+            <h3 style="color: white; margin-bottom: 1rem;">${message}</h3>
+            <button onclick="location.reload()" class="submit-btn" style="margin-top: 2rem;">
+                <span class="btn-text">Done</span>
+            </button>
+        </div>
+    `;
+    
+    // Remove any existing message
+    const existingMessage = formContainer.querySelector('.form-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+    
+    // Add new message
+    formContainer.insertAdjacentHTML('beforeend', messageHTML);
+}
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all components
     initNavbar();
