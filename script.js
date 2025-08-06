@@ -18,6 +18,37 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Feature tabs functionality
+    const featureTabs = document.querySelectorAll('.feature-tab');
+    const featurePanels = document.querySelectorAll('.feature-panel');
+
+    featureTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            // Remove active class from all tabs and panels
+            featureTabs.forEach(t => t.classList.remove('active'));
+            featurePanels.forEach(p => p.classList.remove('active'));
+
+            // Add active class to clicked tab
+            this.classList.add('active');
+
+            // Show corresponding panel
+            const tabId = this.getAttribute('data-tab');
+            const panelToShow = document.getElementById(`${tabId}-panel`);
+            if (panelToShow) {
+                panelToShow.classList.add('active');
+            }
+        });
+    });
+
+    // Initialize first tab as active if none are active
+    if (document.querySelectorAll('.feature-tab.active').length === 0 && featureTabs.length > 0) {
+        featureTabs[0].classList.add('active');
+        const firstTabId = featureTabs[0].getAttribute('data-tab');
+        document.getElementById(`${firstTabId}-panel`).classList.add('active');
+    }
+});
+
 // Waitlist Form Submission with Firebase
 document.addEventListener('DOMContentLoaded', function() {
     const waitlistForm = document.getElementById('waitlistForm');
