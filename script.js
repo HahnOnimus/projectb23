@@ -875,3 +875,104 @@ function addSVGGradients() {
 document.addEventListener('DOMContentLoaded', function() {
     addSVGGradients();
 });
+
+// Add this to your script.js
+document.addEventListener('DOMContentLoaded', function() {
+    // Animate charts on scroll
+    const chartContainers = document.querySelectorAll('.chart-container');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                
+                // Initialize charts when they become visible
+                if (entry.target.querySelector('#valueBarChart')) {
+                    initBarChart();
+                }
+                
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    chartContainers.forEach(container => {
+        observer.observe(container);
+    });
+    
+    // Bar Chart
+    function initBarChart() {
+        const ctx = document.getElementById('valueBarChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Social Media', 'Content', 'Leads', 'Automations', 'Support'],
+                datasets: [
+                    {
+                        label: 'Starter ($20)',
+                        data: [50, 100, 200, 20, 1],
+                        backgroundColor: 'rgba(108, 99, 255, 0.7)',
+                        borderColor: 'rgba(108, 99, 255, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Growth ($50)',
+                        data: [100, 200, 500, 50, 2],
+                        backgroundColor: 'rgba(255, 193, 7, 0.7)',
+                        borderColor: 'rgba(255, 193, 7, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Enterprise ($100)',
+                        data: [150, 300, 800, 100, 3],
+                        backgroundColor: 'rgba(37, 211, 102, 0.7)',
+                        borderColor: 'rgba(37, 211, 102, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: {
+                    duration: 2000,
+                    easing: 'easeOutQuart'
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.9)'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)'
+                        },
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: 'rgba(255, 255, 255, 0.9)',
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                }
+            }
+        });
+    }
+    
+    
+});

@@ -5296,3 +5296,481 @@ a {
         font-size: 1.8rem;
     }
 }
+
+/* Pricing Section */
+.pricing-section {
+    padding: 100px 5%;
+    background: linear-gradient(135deg, #121220, #0a0a15);
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(108, 99, 255, 0.1) 0%, transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(255, 193, 7, 0.1) 0%, transparent 30%);
+    z-index: 0;
+}
+
+.pricing-table-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.pricing-table-wrapper {
+    overflow-x: auto;
+    padding: 20px 0;
+    position: relative;
+}
+
+.pricing-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(108, 99, 255, 0.3);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.pricing-table th, 
+.pricing-table td {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pricing-table th {
+    font-weight: 700;
+    color: white;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.pricing-table td {
+    color: rgba(255, 255, 255, 0.8);
+    position: relative;
+}
+
+.pricing-table td:first-child {
+    text-align: left;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pricing-table td i {
+    color: var(--primary);
+    font-size: 1.2rem;
+    width: 30px;
+    text-align: center;
+}
+
+.pricing-table tr:last-child td {
+    border-bottom: none;
+}
+
+.tier-header {
+    vertical-align: bottom;
+    padding-bottom: 30px;
+    position: relative;
+    min-width: 200px;
+}
+
+.tier-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+}
+
+.starter::after {
+    background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+}
+
+.growth::after {
+    background: linear-gradient(90deg, var(--secondary), #FF8C00);
+}
+
+.enterprise::after {
+    background: linear-gradient(90deg, #25D366, #128C7E);
+}
+
+.tier-badge {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.starter .tier-badge {
+    color: var(--primary);
+}
+
+.growth .tier-badge {
+    color: var(--secondary);
+}
+
+.enterprise .tier-badge {
+    color: #25D366;
+}
+
+.tier-price {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.tier-price span {
+    font-size: 1.2rem;
+    font-weight: 600;
+    opacity: 0.8;
+    color: #fff;
+}
+
+.tier-audience {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 10px;
+}
+
+.revenue-row td {
+    font-weight: 600;
+    color: white !important;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.pricing-table tr:hover td {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.pricing-table tr:hover td:first-child {
+    color: white;
+}
+
+.pricing-table tr:hover td i {
+    color: var(--secondary);
+    transform: scale(1.2);
+}
+
+/* Credit System */
+.credit-system {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.credit-title {
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+    color: white;
+}
+
+.credit-title span {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 700;
+}
+
+.credit-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.credit-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 40px 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.credit-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.credit-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.credit-card:hover::before {
+    opacity: 1;
+}
+
+.credit-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(108, 99, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 2rem;
+    color: var(--primary);
+    transition: all 0.3s ease;
+}
+
+.credit-card:hover .credit-icon {
+    background: var(--primary);
+    color: white;
+    transform: rotate(15deg) scale(1.1);
+}
+
+.credit-card h4 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.credit-card p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.product-note {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 193, 7, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.product-note i {
+    color: var(--secondary);
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.product-note p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    text-align: left;
+    margin: 0;
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.credit-card {
+    animation: float 6s ease-in-out infinite;
+}
+
+.credit-card:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.credit-card:nth-child(3) {
+    animation-delay: 2s;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .pricing-table th, 
+    .pricing-table td {
+        padding: 15px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .credit-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .credit-card {
+        padding: 30px 20px;
+    }
+    
+    .tier-badge {
+        font-size: 1.2rem;
+    }
+    
+    .tier-price {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .pricing-table td:first-child {
+        font-size: 0.9rem;
+    }
+    
+    .pricing-table td i {
+        font-size: 1rem;
+    }
+    
+    .credit-title {
+        font-size: 1.5rem;
+    }
+    
+    .product-note {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Chart Styles */
+.chart-container {
+    margin: 80px auto;
+    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid rgba(108, 99, 255, 0.3);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.chart-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.chart-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.chart-header h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.chart-header p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.1rem;
+}
+
+.radar-chart-container,
+.bar-chart-container,
+.donut-chart-container {
+    position: relative;
+    height: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.donut-chart-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.donut-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 200px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+/* Animation for chart elements */
+@keyframes chartEntrance {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .radar-chart-container,
+    .bar-chart-container,
+    .donut-chart-container {
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .chart-container {
+        padding: 30px 20px;
+    }
+    
+    .donut-chart-container {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .donut-legend {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .radar-chart-container,
+    .bar-chart-container {
+        height: 300px;
+    }
+    
+    .chart-header h3 {
+        font-size: 1.5rem;
+    }
+}
+.fa-star{
+    color: #FFD700;
+    font-size: 1.2rem;
+    margin-right: 5px;
+}
