@@ -6,7 +6,7 @@ const transactionsData = [
         date: 'May 15, 2025',
         referralID: 'Mano107',
         method: 'Paystack (Card Payment)',
-        package: 'Silver Founder\'s Package',
+        package: 'Silver Pioneer\'s Package',
         benefits: '2.5 equity conversion opportunity, Board Seat, First Right of Refusal'
     },
     {
@@ -15,7 +15,7 @@ const transactionsData = [
         date: 'May 10, 2025',
         referralID: 'Mano107',
         method: 'Paystack (Bank Transfer)',
-        package: 'Bronze Founder\'s Package',
+        package: 'Bronze Pioneer\'s Package',
         benefits: '1 equity conversion opportunity, Board Observer Rights'
     },
     {
@@ -24,7 +24,7 @@ const transactionsData = [
         date: 'May 18, 2025',
         referralID: 'Mano107',
         method: 'Paystack (Card Payment)',
-        package: 'Gold Founder\'s Package',
+        package: 'Gold Pioneer\'s Package',
         benefits: '5 equity conversion opportunity, Custom Investment Terms'
     }
 ];
