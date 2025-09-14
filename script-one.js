@@ -400,7 +400,7 @@ function animateValue(element, start, end, duration, formatter = null) {
 // Countdown Timer
 function initCountdown() {
     // Target date: September 30, 2025
-    const targetDate = new Date('September 30, 2025 00:00:00').getTime();
+    const targetDate = new Date('October 15, 2025 00:00:00').getTime();
     
     // Get countdown elements
     const daysElement = document.getElementById('countdown-days');

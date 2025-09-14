@@ -1111,8 +1111,8 @@ a {
 .active-nav-link{
     font-weight: 600;
     font-size: 1.1rem;
-    color: white;
-    background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+    color: var(--gray);
+    background-color: var(--secondary);
     padding: 0.5rem;
     border-radius: 0.50rem;
     position: relative;
