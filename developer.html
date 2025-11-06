@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Developers - BVaaS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./logo.png" type="image/png">
+    <style>
+        /* Additional styles specific to the developers page */
+        .developers-hero {
+            min-height: 70vh;
+            background: linear-gradient(135deg, rgba(18, 18, 18, 0.9), rgba(10, 10, 10, 0.9)), 
+                        url('./background-one.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 120px 5% 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .developers-hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .developers-hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        
+        .developers-hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .developers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 5%;
+        }
+        
+        .developer-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .developer-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(108, 99, 255, 0.3);
+            border-color: rgba(108, 99, 255, 0.5);
+        }
+        
+        .developer-image {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .developer-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .developer-card:hover .developer-image img {
+            transform: scale(1.1);
+        }
+        
+        .developer-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .developer-card:hover .developer-overlay {
+            opacity: 1;
+        }
+        
+        .developer-social {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .developer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(108, 99, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .developer-social a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .developer-info {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .developer-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            color: white;
+        }
+        
+        .developer-title {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .developer-bio {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .developer-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+        }
+        
+        .skill-tag {
+            background: rgba(108, 99, 255, 0.2);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(108, 99, 255, 0.3);
+        }
+        
+        .developer-stats {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 30px;
+            background: rgba(0,0,0,0.3);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .tech-stack-section {
+            padding: 100px 5%;
+            background: linear-gradient(135deg, #121220, #0a0a15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tech-stack-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(108, 99, 255, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(255, 193, 7, 0.1) 0%, transparent 30%);
+            z-index: 0;
+        }
+        
+        .tech-stack-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .tech-item {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tech-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tech-item:hover::before {
+            opacity: 1;
+        }
+        
+        .tech-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .tech-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .developer-quote {
+            padding: 100px 5%;
+            background: linear-gradient(135deg, #0f0c29, #1a1a2e);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .developer-quote::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(108, 99, 255, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(255, 193, 7, 0.1) 0%, transparent 30%);
+            z-index: 0;
+        }
+        
+        .quote-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quote-icon {
+            font-size: 4rem;
+            color: rgba(108, 99, 255, 0.3);
+            margin-bottom: 30px;
+        }
+        
+        .quote-text {
+            font-size: 2rem;
+            line-height: 1.4;
+            margin-bottom: 40px;
+            color: white;
+            font-style: italic;
+        }
+        
+        .quote-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .quote-author img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(108, 99, 255, 0.5);
+        }
+        
+        .author-info h4 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: white;
+        }
+        
+        .author-info p {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* Animation for cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .developer-card {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .developer-card:nth-child(1) { animation-delay: 0.1s; }
+        .developer-card:nth-child(2) { animation-delay: 0.2s; }
+        .developer-card:nth-child(3) { animation-delay: 0.3s; }
+        .developer-card:nth-child(4) { animation-delay: 0.4s; }
+        .developer-card:nth-child(5) { animation-delay: 0.5s; }
+        .developer-card:nth-child(6) { animation-delay: 0.6s; }
+        .developer-card:nth-child(7) { animation-delay: 0.7s; }
+        .developer-card:nth-child(8) { animation-delay: 0.8s; }
+        .developer-card:nth-child(9) { animation-delay: 0.9s; }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .developers-hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .developers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .developers-hero {
+                min-height: 60vh;
+                padding: 100px 5% 60px;
+            }
+            
+            .developers-hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .developers-hero p {
+                font-size: 1.2rem;
+            }
+            
+            .developers-grid {
+                grid-template-columns: 1fr;
+                padding: 60px 5%;
+            }
+            
+            .quote-text {
+                font-size: 1.5rem;
+            }
+            
+            .tech-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .developers-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .developer-info {
+                padding: 20px;
+            }
+            
+            .developer-stats {
+                padding: 15px 20px;
+            }
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    
+    <!-- Developers Hero Section -->
+    <section class="developers-hero">
+        <div class="developers-hero-content">
+            <h1><span class="gradient-text">Meet Our Developers</span></h1>
+            <p>The brilliant minds behind BVaaS - crafting the future of business visibility with cutting-edge technology and innovative solutions.</p>
+        </div>
+    </section>
+
+    <!-- Developers Grid -->
+    <section class="developers-grid">
+        <!-- Developer -->
+        <div class="developer-card">
+            <div class="developer-image">
+                <img src="./profile.jpg" alt="Victor Mark Temitope">
+                </div>
+            <div class="developer-info">
+                <h3>John Doe</h3>
+                <p class="developer-title">Alpha Team Developer</p>
+                <p class="developer-bio">300Lv Computer Science undergraduate at Lead City University with a passion for building scalable solutions that solve real-world problems.</p>
+                <div class="developer-skills">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Node.js</span>
+                </div>
+            </div>
+            <div class="developer-stats">
+                <div class="stat">
+                    <span class="stat-value">5+</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">Years Exp</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">15K</span>
+                    <span class="stat-label">Commits</span>
+                </div>
+            </div>
+        </div>
+        <!-- Developer -->
+        <div class="developer-card">
+            <div class="developer-image">
+                <img src="./profile.jpg" alt="Victor Mark Temitope">
+                </div>
+            <div class="developer-info">
+                <h3>John Doe</h3>
+                <p class="developer-title">Alpha Team Developer</p>
+                <p class="developer-bio">300Lv Computer Science undergraduate at Lead City University with a passion for building scalable solutions that solve real-world problems.</p>
+                <div class="developer-skills">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Node.js</span>
+                </div>
+            </div>
+            <div class="developer-stats">
+                <div class="stat">
+                    <span class="stat-value">5+</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">Years Exp</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">15K</span>
+                    <span class="stat-label">Commits</span>
+                </div>
+            </div>
+        </div>
+        <!-- Developer -->
+        <div class="developer-card">
+            <div class="developer-image">
+                <img src="./profile.jpg" alt="Victor Mark Temitope">
+                </div>
+            <div class="developer-info">
+                <h3>John Doe</h3>
+                <p class="developer-title">Alpha Team Developer</p>
+                <p class="developer-bio">300Lv Computer Science undergraduate at Lead City University with a passion for building scalable solutions that solve real-world problems.</p>
+                <div class="developer-skills">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Node.js</span>
+                </div>
+            </div>
+            <div class="developer-stats">
+                <div class="stat">
+                    <span class="stat-value">5+</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">Years Exp</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">15K</span>
+                    <span class="stat-label">Commits</span>
+                </div>
+            </div>
+        </div>
+        <!-- Developer -->
+        <div class="developer-card">
+            <div class="developer-image">
+                <img src="./profile.jpg" alt="Victor Mark Temitope">
+                </div>
+            <div class="developer-info">
+                <h3>John Doe</h3>
+                <p class="developer-title">Alpha Team Developer</p>
+                <p class="developer-bio">300Lv Computer Science undergraduate at Lead City University with a passion for building scalable solutions that solve real-world problems.</p>
+                <div class="developer-skills">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Node.js</span>
+                </div>
+            </div>
+            <div class="developer-stats">
+                <div class="stat">
+                    <span class="stat-value">5+</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">Years Exp</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">15K</span>
+                    <span class="stat-label">Commits</span>
+                </div>
+            </div>
+        </div>
+        <!-- Developer -->
+        <div class="developer-card">
+            <div class="developer-image">
+                <img src="./profile.jpg" alt="Victor Mark Temitope">
+                </div>
+            <div class="developer-info">
+                <h3>John Doe</h3>
+                <p class="developer-title">Alpha Team Developer</p>
+                <p class="developer-bio">300Lv Computer Science undergraduate at Lead City University with a passion for building scalable solutions that solve real-world problems.</p>
+                <div class="developer-skills">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Node.js</span>
+                </div>
+            </div>
+            <div class="developer-stats">
+                <div class="stat">
+                    <span class="stat-value">5+</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">Years Exp</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">15K</span>
+                    <span class="stat-label">Commits</span>
+                </div>
+            </div>
+        </div>
+        <!-- Developer -->
+        <div class="developer-card">
+            <div class="developer-image">
+                <img src="./profile.jpg" alt="Victor Mark Temitope">
+                </div>
+            <div class="developer-info">
+                <h3>John Doe</h3>
+                <p class="developer-title">Alpha Team Developer</p>
+                <p class="developer-bio">300Lv Computer Science undergraduate at Lead City University with a passion for building scalable solutions that solve real-world problems.</p>
+                <div class="developer-skills">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Node.js</span>
+                </div>
+            </div>
+            <div class="developer-stats">
+                <div class="stat">
+                    <span class="stat-value">5+</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">Years Exp</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">15K</span>
+                    <span class="stat-label">Commits</span>
+                </div>
+            </div>
+        </div>
+
+        
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="tech-stack-section">
+        <div class="section-header">
+            <h2>Our <span class="gradient-text">Technology</span> Stack</h2>
+            <p class="section-subtitle">We leverage cutting-edge technologies to build robust, scalable solutions</p>
+        </div>
+        
+        <div class="tech-stack-container">
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <div class="tech-name">React</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-node-js"></i>
+                    </div>
+                    <div class="tech-name">Node.js</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-rust"></i>
+                    </div>
+                    <div class="tech-name">Rust</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="tech-name">Postgres</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-server"></i>
+                    </div>
+                    <div class="tech-name">Hetzner</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-docker"></i>
+                    </div>
+                    <div class="tech-name">Docker</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-js-square"></i>
+                    </div>
+                    <div class="tech-name">JavaScript</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="tech-name">AI/ML</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="tech-name">Security</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="tech-name">Responsive</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="tech-name">Performance</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="tech-name">Cloud</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developer Quote Section -->
+    <section class="developer-quote">
+        <div class="quote-container">
+            <div class="quote-icon">
+                <i class="fas fa-quote-left"></i>
+            </div>
+            <p class="quote-text">We’re building the core infrastructure that will give businesses across the world the power to be discovered, trusted, and chosen. Every commit, every API design, every UX decision carries weight because it becomes the foundation thousands of entrepreneurs will rely on to stay visible in a crowded digital landscape. We code systems that converts obscurity into opportunity, turning silent businesses into searchable, reachable, revenue-producing entities. What we create here shapes outcomes, opens markets, and rewrites how visibility is earned. B23 is a system of empowerment, and every line we write is part of that future.</p>
+            <div class="quote-icon">
+                <i class="fas fa-quote-right"></i>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+        // Navigation functionality
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+        }
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Navbar scroll effect
+        let lastScrollY = window.scrollY;
+        const navbar = document.querySelector('.navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > lastScrollY && window.scrollY > 100) {
+                navbar.classList.add('hidden');
+            } else {
+                navbar.classList.remove('hidden');
+            }
+            
+            lastScrollY = window.scrollY;
+        });
+    </script>
+</body>
+</html>
