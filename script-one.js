@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     initAnimations();
     addSVGGradients();
-    initCountdown();
     showPieChart();
     tabSection();
 });
@@ -397,60 +396,6 @@ function animateValue(element, start, end, duration, formatter = null) {
     window.requestAnimationFrame(step);
 }
 
-// Countdown Timer
-function initCountdown() {
-    // Target date: November 30, 2025
-    const targetDate = new Date('November 30, 2025 00:00:00').getTime();
-    
-    // Get countdown elements
-    const daysElement = document.getElementById('countdown-days');
-    const hoursElement = document.getElementById('countdown-hours');
-    const minutesElement = document.getElementById('countdown-minutes');
-    const secondsElement = document.getElementById('countdown-seconds');
-    const progressCircles = document.querySelectorAll('.circle-progress');
-    
-    // Calculate circumference for progress circles (2πr)
-    const circumference = 2 * Math.PI * 45;
-    
-    // Update countdown every second
-    const countdown = setInterval(() => {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
-        
-        // Time calculations
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        
-        // Display results
-        daysElement.textContent = days.toString().padStart(2, '0');
-        hoursElement.textContent = hours.toString().padStart(2, '0');
-        minutesElement.textContent = minutes.toString().padStart(2, '0');
-        secondsElement.textContent = seconds.toString().padStart(2, '0');
-        
-        // Update progress circles
-        const totalHoursInDay = 24;
-        const totalMinutesInHour = 60;
-        const totalSecondsInMinute = 60;
-        
-        // Calculate dash offsets based on time remaining
-        progressCircles[0].style.setProperty('--dash-offset', circumference - (days % 100 / 100) * circumference);
-        progressCircles[1].style.setProperty('--dash-offset', circumference - (hours / totalHoursInDay) * circumference);
-        progressCircles[2].style.setProperty('--dash-offset', circumference - (minutes / totalMinutesInHour) * circumference);
-        progressCircles[3].style.setProperty('--dash-offset', circumference - (seconds / totalSecondsInMinute) * circumference);
-        
-        // If countdown is finished
-        if (distance < 0) {
-            clearInterval(countdown);
-            daysElement.textContent = '00';
-            hoursElement.textContent = '00';
-            minutesElement.textContent = '00';
-            secondsElement.textContent = '00';
-        }
-    }, 1000);
-}
-
 // Add SVG gradients (place this in your HTML before the closing </body> tag)
 function addSVGGradients() {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -547,5 +492,4 @@ function addSVGGradients() {
 // Initialize countdown when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     addSVGGradients();
-    initCountdown();
 });
