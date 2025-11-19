@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Unbelievable Sky — Prototype</title>
+  <style>
+    :root{
+      --horizon:#fffae6;
+      --day-sky-1:#bfe9ff;
+      --day-sky-2:#7fd2ff;
+      --dusk-1:#ffb347;
+      --dusk-2:#8b5cf6;
+      --night-1:#041024;
+      --night-2:#0b2340;
+      --accent:#8ef9c0;
+      --glass: rgba(255,255,255,0.06);
+      color-scheme: light dark;
+    }
+    html,body{height:100%;margin:0;background:var(--night-1);font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+    .sky{position:fixed;inset:0;overflow:hidden}
+
+    /* animated gradient sky */
+    .gradient {
+      position:absolute;inset:0;transition:opacity .6s linear;will-change:transform,opacity;
+      background:linear-gradient(180deg,var(--night-1),var(--night-2));
+      filter:contrast(1.05) saturate(1.1);
+      z-index:0;
+    }
+
+    /* layered clouds (SVG masks) */
+    .clouds{position:absolute;inset:0;pointer-events:none;z-index:5}
+    .cloud-layer{position:absolute;left:-20%;width:140%;height:40vh;top:10vh;opacity:.75;transform:translateZ(0)}
+    .cloud-layer.layer-2{top:30vh;opacity:.55;height:30vh}
+    .cloud{fill:rgba(255,255,255,0.08);filter:blur(30px);}
+
+    /* stars canvas sits above gradient */
+    canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2}
+
+    /* aurora canvas */
+    #aurora{z-index:3;mix-blend-mode:screen;pointer-events:none}
+
+    /* silhouette */
+    .ground{
+      position:absolute;left:0;right:0;bottom:0;height:18vh;background:linear-gradient(180deg,transparent,#021017);z-index:10;pointer-events:none
+    }
+    .silhouette{position:absolute;left:0;right:0;bottom:0;height:18vh;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.85));}
+
+    /* controls */
+    .controls{position:fixed;left:18px;bottom:18px;z-index:60;backdrop-filter:blur(6px);background:var(--glass);padding:10px;border-radius:12px;color:#fff;max-width:320px}
+    .control-row{display:flex;gap:8px;align-items:center;margin:6px 0}
+    label{font-size:13px;min-width:70px}
+    input[type=range]{flex:1}
+    button{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);padding:6px 8px;border-radius:8px;color:#fff;cursor:pointer}
+
+    .logo{position:fixed;right:18px;bottom:18px;z-index:60;color:#fff;opacity:.9;font-weight:600}
+
+    /* small responsive tweak */
+    @media (max-width:600px){.controls{left:12px;right:12px;max-width:unset}}
+  </style>
+</head>
+<body>
+  <div class="sky">
+    <div id="gradient" class="gradient"></div>
+
+    <canvas id="stars"></canvas>
+    <canvas id="aurora"></canvas>
+
+    <div class="clouds" aria-hidden="true">
+      <svg class="cloud-layer layer-1" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid slice">
+        <path class="cloud" d="M0 80 C150 0 350 150 600 80 C850 10 1050 130 1200 80 L1200 300 L0 300 Z"/>
+      </svg>
+      <svg class="cloud-layer layer-2" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid slice">
+        <path class="cloud" d="M0 140 C200 50 400 220 700 140 C900 80 1100 200 1200 140 L1200 300 L0 300 Z"/>
+      </svg>
+    </div>
+
+    <div class="ground" aria-hidden="true">
+      <div class="silhouette"></div>
+    </div>
+
+  </div>
+
+  <div class="controls">
+    <div class="control-row"><label>Time</label><input id="time" type="range" min="0" max="24" step="0.1" value="21"></div>
+    <div class="control-row"><label>Stars</label><input id="starDensity" type="range" min="0" max="1" step="0.01" value="0.6"></div>
+    <div class="control-row"><label>Aurora</label><button id="toggleAurora">On</button><label style="min-width:50px;margin-left:8px">Wind</label><input id="wind" type="range" min="-1" max="1" step="0.01" value="0.2"></div>
+    <div class="control-row"><label>Mode</label>
+      <select id="preset">
+        <option value="night">Deep night</option>
+        <option value="dawn">Dawn</option>
+        <option value="dusk">Dusk</option>
+        <option value="aurora">Aurora rave</option>
+        <option value="surreal">Surreal</option>
+      </select>
+    </div>
+  </div>
+
+
+  <script>
+    /* Utilities */
+    const el = id => document.getElementById(id);
+    const starsCanvas = el('stars');
+    const auroraCanvas = el('aurora');
+    const g = el('gradient');
+    const ctxS = starsCanvas.getContext('2d');
+    const ctxA = auroraCanvas.getContext('2d');
+
+    function resize(){
+      const DPR = Math.min(window.devicePixelRatio || 1, 2);
+      [starsCanvas, auroraCanvas].forEach(c => {
+        c.width = innerWidth * DPR;
+        c.height = innerHeight * DPR;
+        c.style.width = innerWidth+'px';
+        c.style.height = innerHeight+'px';
+        c.getContext('2d').setTransform(DPR,0,0,DPR,0,0);
+      });
+    }
+    addEventListener('resize', resize);
+    resize();
+
+    /* stars generation */
+    const stars = [];
+    function makeStars(density = 0.6){
+      stars.length = 0;
+      const area = innerWidth*innerHeight;
+      const count = Math.floor(area / 8000 * density * 2.5);
+      for(let i=0;i<count;i++){
+        stars.push({
+          x: Math.random()*innerWidth,
+          y: Math.random()*innerHeight*0.7,
+          r: Math.random()*1.6 + 0.2,
+          a: Math.random(),
+          tw: Math.random()*0.03 + 0.005
+        });
+      }
+    }
+
+    function drawStars(time){
+      ctxS.clearRect(0,0,innerWidth,innerHeight);
+      for(const s of stars){
+        s.a += s.tw * Math.sin(time*0.001 + s.x*0.0005);
+        const alpha = 0.6 + 0.4*Math.sin(s.a*6.28);
+        ctxS.beginPath();
+        ctxS.fillStyle = `rgba(255,255,255,${alpha})`;
+        ctxS.arc(s.x + (mouse.x- innerWidth/2)*0.01*(s.r+1), s.y + (mouse.y- innerHeight/2)*0.01*(s.r+1), s.r,0,Math.PI*2);
+        ctxS.fill();
+      }
+    }
+
+    /* aurora painter: layered sin waves with blur and additive blend */
+    let auroraOn = true;
+    function drawAurora(t){
+      ctxA.clearRect(0,0,innerWidth,innerHeight);
+      if(!auroraOn) return;
+      ctxA.globalCompositeOperation = 'lighter';
+      const bands = 3;
+      for(let b=0;b<bands;b++){
+        const h = 0.16 + b*0.06;
+        ctxA.save();
+        ctxA.globalAlpha = 0.6 - b*0.15;
+        ctxA.filter = 'blur(' + (30 - b*8) + 'px)';
+        const grad = ctxA.createLinearGradient(0, innerHeight*h, 0, innerHeight);
+        const hue = 150 + b*30 + Math.sin(t*0.0007 + b)*40;
+        grad.addColorStop(0, `hsla(${hue},90%,65%,.85)`);
+        grad.addColorStop(0.5, `hsla(${hue+40},80%,55%,.5)`);
+        grad.addColorStop(1, 'rgba(0,0,0,0)');
+        ctxA.fillStyle = grad;
+
+        ctxA.beginPath();
+        const amp = 120 + Math.sin(t*0.0009 + b)*80;
+        const freq = 0.002 + b*0.001;
+        ctxA.moveTo(0, innerHeight);
+        for(let x=0;x<innerWidth;x+=8){
+          const y = innerHeight*h + Math.sin((x+t* (0.02 + b*0.01))*freq + b)*amp*(0.6 + Math.sin(t*0.0004 + b)/3);
+          ctxA.lineTo(x, y);
+        }
+        ctxA.lineTo(innerWidth, innerHeight);
+        ctxA.closePath();
+        ctxA.fill();
+        ctxA.restore();
+      }
+      ctxA.globalCompositeOperation = 'source-over';
+    }
+
+    /* animated gradient based on time of day */
+    function updateGradient(hour){
+      // hour 0-24
+      let css;
+      if(hour >= 6 && hour < 9){ // dawn
+        css = `linear-gradient(180deg, ${blend('#041024','#ffefd5', (9-hour)/3 )}, ${blend('#8fd3ff','#ffd1a9', (9-hour)/3 )})`;
+      } else if(hour >=9 && hour < 17){ // day
+        css = `linear-gradient(180deg, ${'var(--day-sky-1)'}, ${'var(--day-sky-2)'})`;
+      } else if(hour >=17 && hour <20){ // dusk
+        css = `linear-gradient(180deg, ${'var(--dusk-1)'}, ${'var(--dusk-2)'})`;
+      } else { // night
+        css = `linear-gradient(180deg, ${'var(--night-1)'}, ${'var(--night-2)'})`;
+      }
+      g.style.background = css;
+    }
+
+    // small color blend helper
+    function blend(a,b,t){
+      const pa = hexToRgb(a); const pb = hexToRgb(b);
+      const r = Math.round(pa.r + (pb.r-pa.r)*t);
+      const g = Math.round(pa.g + (pb.g-pa.g)*t);
+      const bl = Math.round(pa.b + (pb.b-pa.b)*t);
+      return `rgb(${r},${g},${bl})`;
+    }
+    function hexToRgb(hex){
+      hex = hex.replace('#','');
+      if(hex.length===3) hex = hex.split('').map(c=>c+c).join('');
+      const n = parseInt(hex,16);
+      return {r:(n>>16)&255,g:(n>>8)&255,b:n&255};
+    }
+
+    /* mouse parallax */
+    const mouse = {x:innerWidth/2,y:innerHeight/2};
+    addEventListener('mousemove', e=>{mouse.x = e.clientX; mouse.y = e.clientY});
+    addEventListener('touchmove', e=>{mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY}, {passive:true});
+
+    /* shooting stars */
+    function shoot(){
+      const sx = Math.random()*innerWidth*0.8 + innerWidth*0.1;
+      const sy = Math.random()*innerHeight*0.6;
+      const len = 180 + Math.random()*300;
+      const ang = -0.4 - Math.random()*0.6;
+      const ttl = 700 + Math.random()*400;
+      const start = performance.now();
+      const step = () => {
+        const now = performance.now();
+        const p = (now-start)/ttl;
+        if(p>1) return;
+        ctxS.save();
+        ctxS.globalCompositeOperation = 'lighter';
+        ctxS.strokeStyle = 'rgba(255,255,255,'+(1-p)+')';
+        ctxS.lineWidth = 1.2 + (1-p)*2;
+        ctxS.beginPath();
+        ctxS.moveTo(sx + ang*len*p, sy + len*p*0.05);
+        ctxS.lineTo(sx + ang*len*(p+0.02), sy + len*(p+0.02)*0.05);
+        ctxS.stroke();
+        ctxS.restore();
+        requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    addEventListener('click', shoot);
+
+    /* UI wiring */
+    const timeInput = el('time');
+    const starInput = el('starDensity');
+    const toggleAuroraBtn = el('toggleAurora');
+    const windInput = el('wind');
+    const preset = el('preset');
+
+    timeInput.addEventListener('input', ()=>{updateGradient(+timeInput.value)});
+    starInput.addEventListener('input', ()=>{makeStars(+starInput.value)});
+    toggleAuroraBtn.addEventListener('click', ()=>{auroraOn = !auroraOn; toggleAuroraBtn.textContent = auroraOn? 'On':'Off'});
+    preset.addEventListener('change', ()=>{
+      const v = preset.value;
+      if(v==='night'){timeInput.value=22; starInput.value=0.8; auroraOn=false}
+      if(v==='dawn'){timeInput.value=7; starInput.value=0.2; auroraOn=false}
+      if(v==='dusk'){timeInput.value=18.5; starInput.value=0.2; auroraOn=false}
+      if(v==='aurora'){timeInput.value=23; starInput.value=0.6; auroraOn=true}
+      if(v==='surreal'){timeInput.value=2; starInput.value=0.95; auroraOn=true}
+      updateGradient(+timeInput.value);
+      makeStars(+starInput.value);
+    });
+
+    // initial
+    makeStars(+starInput.value);
+    updateGradient(+timeInput.value);
+
+    /* animation loop */
+    let last = 0;
+    function loop(t){
+      if(Math.abs(t-last) > 12){ // throttle small
+        drawStars(t);
+        drawAurora(t + (+windInput.value)*5000);
+        last = t;
+      }
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+
+    // small demo: occasional random shooting star
+    setInterval(()=>{ if(Math.random()<0.35) shoot(); }, 2500);
+
+    // helpful: keep canvas sized on load
+    addEventListener('load', ()=>{resize(); makeStars(+starInput.value)});
+
+  </script>
+</body>
+</html>
