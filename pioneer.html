@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -234,6 +235,133 @@
                 padding: 1.5rem;
             }
         }
+        .about-section {
+            padding: 5rem 2rem;
+            background: #000;
+            color: white;
+        }
+        
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(108, 99, 255, 0.3);
+        }
+        
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, #6C63FF, #FFC107);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .about-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #FFC107;
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .about-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.4);
+        }
+        
+        @media (max-width: 992px) {
+            .about-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 3rem;
+            }
+            
+            .about-image, .about-content {
+                width: 100%;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .about-title {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .about-section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .about-title {
+                font-size: 2rem;
+            }
+            
+            .about-text {
+                font-size: 1rem;
+            }
+            
+            .about-button {
+                padding: 0.9rem 2rem;
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .about-section {
+                padding: 3rem 1rem;
+            }
+            
+            .about-container {
+                gap: 2rem;
+            }
+            
+            .about-title {
+                font-size: 1.8rem;
+            }
+            
+            .about-text {
+                font-size: 0.95rem;
+            }
+            
+            .about-button {
+                padding: 0.8rem 1.8rem;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body class="dark-theme">
@@ -256,22 +384,25 @@
             </div>
         </div>
     </header>
-<section class="shares-counter">
-    <div class="shares-container">
-        <div class="shares-content">
-            <div class="shares-header">
-                <p class="urgency-note">
-                    In every breakout startup story, the winners were always the ones who got in early. Think of Harvard and Stanford dorm rooms where Facebook and Google were born, or University of Chicago where Larry Ellison's earliest ideas took shape. Early believers recognized the vision before the world did. Now, Lead City University (LCU) undergraduates are producing B23 in that same spirit, bold ideas, relentless execution and turning it into a platform designed for global domination. The only question is: will you be watching from the sidelines, or claiming your place at the table?
+    <section id="about" class="about-section">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="personal.jpg" alt="About BVaaS">
+            </div>
+            <div class="about-content">
+                <h2 class="about-title">Be Seen, Be Remembered, Be Legendary</h2>
+                <p class="about-text">
+                    The future bows to those who act first. B23 is that rare force that will change how businesses are seen across Africa and the world. With just ₦500,000, you do far more than support, you become an original pillar, riding the same early wave that carried Uber, Airbnb, and Canva before anyone knew their names. You claim your seat at the table before the doors even open, earning lifetime recognition, permanent foundation status, and a full money back guarantee after launch plus 40% incentive, eliminating risk while your upside remains limitless. Your five hundred thousand naira is fully protected, allows us to build the product, gives you a spot in this limited offer. You secure a position in a platform designed to elevate millions of businesses, shape entire markets, and expand globally. Years from now, when B23 stands tall, you will remember this moment as the instant you chose vision over hesitation. You have "nothing to lose". Relevance begins here. Legacy begins here.
                 </p>
+                <a href="https://wa.me/+2348100322782" class="about-button">Don’t Watch. Make History</a>
             </div>
         </div>
-    </div>
-</section>
+    </section>
     <!-- Investment Section -->
     <section id="invest" class="investment-section">
         <div class="section-header">
-            <h2>Claim your <span class="gradient-text">Pioneer</span> Package</h2>
-            <p class="section-subtitle">Hurry Up Before Its Gone Forever!.</p>
+            <h2>Become Our <span class="gradient-text">Business Partner</span></h2>
+            <p class="section-subtitle">Only A Few Exclusives, Then Its Gone Forever!</p>
         </div>
         
         <div class="investment-tiers">
@@ -281,11 +412,11 @@
             <div class="tier-price">₦1,000,000</div>
         </div>
         <ul class="tier-benefits">
-            <li>SAFE conversion at 15% discount*</li>
+            <li>SAFE conversion at extra 5% discount*</li>
             <li>Potential lifetime ROI of up to ₦500k per month*</li>
             <li>1.5x full repayment option</li>
-            <li>Exclusive Pioneer’s Badge and Certificate</li>
-            <li>Pioneers’ Events: Invitation, Recognition, and Spotlight</li>
+            <li>Exclusive Pioneer’s Badge and Certificate, Recognition, and Spotlight</li>
+            <li>3 Months of Driving Businesses to your Platform, 10 - 20 per Month</li>
         </ul>
         <a href="https://paystack.shop/pay/5xlxfbp9rA" class="invest-now">Claim Now</a>
         <small class="disclaimer">
@@ -298,11 +429,11 @@
             <div class="tier-price">₦2,000,000</div>
         </div>
         <ul class="tier-benefits">
-            <li>SAFE conversion at 20% discount*</li>
+            <li>SAFE conversion at extra 10% discount*</li>
             <li>Potential lifetime ROI of up to ₦1.5m ($1,000) per month*</li>
             <li>1.5x full repayment option</li>
-            <li>Exclusive Pioneer’s Badge and Certificate</li>
-            <li>Pioneers’ Events: Invitation, Recognition, and Spotlight</li>
+            <li>Exclusive Pioneer’s Badge and Certificate, Recognition, and Spotlight</li>
+            <li>5 Months of Driving Businesses to your Platform, 30 - 40 per Month</li>
         </ul>
         <a href="https://paystack.shop/pay/39hpdfxifb" class="invest-now">Claim Now</a>
         <div class="featured-badge">RECOMMENDED</div>
@@ -316,11 +447,11 @@
             <div class="tier-price">₦3,000,000+</div>
         </div>
         <ul class="tier-benefits">
-            <li>SAFE conversion at 25% discount*</li>
+            <li>SAFE conversion at extra 15% discount*</li>
             <li>Potential lifetime ROI of up to ₦3m ($2,000) per month*</li>
             <li>1.5x full repayment option</li>
-            <li>Exclusive Pioneer’s Badge and Certificate</li>
-            <li>Pioneers’ Events: Invitation, Recognition, and Spotlight</li>
+            <li>Exclusive Pioneer’s Badge and Certificate, Recognition, and Spotlight</li>
+            <li>7 Months of Driving Businesses to your Platform, 40 - 50 per Month</li>
         </ul>
         <a href="https://paystack.shop/pay/0edekqg3-a" class="invest-now">Claim Now</a>
         <small class="disclaimer">
