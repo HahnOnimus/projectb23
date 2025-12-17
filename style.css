@@ -39,6 +39,34 @@ a {
     color: inherit;
 }
 
+/* Christmas Logo Hat - Smaller & Top Right */
+.nav-brand {
+    position: relative;
+    display: inline-block;
+    padding-right: 10px; /* Add space for the hat */
+}
+
+.christmas-hat {
+    position: absolute;
+    top: -18px; /* Position above the text */
+    right: -5px; /* Position at the right edge */
+    width: 20px; /* Smaller size */
+    height: auto;
+    z-index: 1001;
+    pointer-events: none;
+    transform: rotate(15deg); /* Tilt it slightly */
+}
+
+/* Optional subtle animation */
+@keyframes hatWiggle {
+    0%, 100% { transform: rotate(15deg); }
+    50% { transform: rotate(25deg); }
+}
+
+.christmas-hat.animated {
+    animation: hatWiggle 3s ease-in-out infinite;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
