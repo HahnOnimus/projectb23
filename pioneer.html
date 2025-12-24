@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -150,21 +149,6 @@
             z-index: 1;
         }
         
-        /* Glass Morphism Effect 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 3rem;
-            border: 1px solid rgba(108, 99, 255, 0.3);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-            margin-top: 3rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeIn 1.5s ease-out;
-        }
-        */
         .glass-card {
             padding: 3rem;
             margin-top: 3rem;
@@ -235,6 +219,7 @@
                 padding: 1.5rem;
             }
         }
+        
         .about-section {
             padding: 5rem 2rem;
             background: #000;
@@ -362,6 +347,197 @@
                 font-size: 0.9rem;
             }
         }
+
+        /* SIMPLE PIONEER CARDS SECTION */
+        .pioneer-cards-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #0a0a15, #121220);
+            color: white;
+        }
+        
+        .cards-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pioneer-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .pioneer-main-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #6C63FF, #FFC107);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .pioneer-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .pioneer-card-simple {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            min-height: auto;
+        }
+        
+        .pioneer-card-simple:hover {
+            transform: translateY(-5px);
+            border-color: #6C63FF;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card-icon-simple {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .card-1-simple .card-icon-simple {
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.2), rgba(108, 99, 255, 0.1));
+            color: #6C63FF;
+        }
+        
+        .card-2-simple .card-icon-simple {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.2), rgba(255, 193, 7, 0.1));
+            color: #FFC107;
+        }
+        
+        .card-3-simple .card-icon-simple {
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.2), rgba(37, 211, 102, 0.1));
+            color: #25D366;
+        }
+        
+        .card-4-simple .card-icon-simple {
+            background: linear-gradient(135deg, rgba(255, 107, 129, 0.2), rgba(255, 107, 129, 0.1));
+            color: #FF6B81;
+        }
+        
+        .card-5-simple .card-icon-simple {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.1));
+            color: #8B5CF6;
+        }
+        
+        .card-title-simple {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: white;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .card-text-simple {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .card-text-simple strong {
+            color: white;
+        }
+        
+        /* FINAL CTA SECTION */
+        .final-cta-section {
+            padding: 5rem 2rem;
+            background: #000;
+            text-align: center;
+            color: white;
+        }
+        
+        .final-cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .final-cta-title {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, #6C63FF, #FFC107);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .final-cta-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .final-cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: #FFC107;
+            color: #000;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+        }
+        
+        .final-cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(108, 99, 255, 0.4);
+        }
+        
+        .urgency-note-simple {
+            color: #FFC107;
+            font-weight: 600;
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pioneer-main-title {
+                font-size: 2.5rem;
+            }
+
+            .pioneer-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .final-cta-title {
+                font-size: 2.2rem;
+            }
+            
+            .final-cta-button {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body class="dark-theme">
@@ -378,12 +554,13 @@
                 <h1 class="hero-title">What If You Could Own a Piece of the Next Million-Dollar Company Before It Launches?</h1>
                 <div class="glass-card">
                     <p class="hero-subtitle">
-                        <span class="bold-stroke">Through our exclusive Pioneer Program, you’re positioning yourself at the foundation of a platform with global relevance. This is your exclusive chance to secure a lifetime spot in a movement designed for scale, dominance, and lasting impact.</span>
+                        <span class="bold-stroke">Through our exclusive Pioneer Program, you're positioning yourself at the foundation of a platform with global relevance. This is your exclusive chance to secure a lifetime spot in a movement designed for scale, dominance, and lasting impact.</span>
                     </p>
                 </div>
             </div>
         </div>
     </header>
+    
     <section id="about" class="about-section">
         <div class="about-container">
             <div class="about-image">
@@ -392,85 +569,128 @@
             <div class="about-content">
                 <h2 class="about-title">Be Seen, Be Remembered, Be Legendary</h2>
                 <p class="about-text">
-                    The future bows to those who act first. B23 is that rare force that will change how businesses are seen across Africa and the world. With just <span class="gradient-text">₦500,000</span>, you do far more than support, you become an original pillar, riding the same early wave that carried Uber, Airbnb, and Canva before anyone knew their names. You claim your seat at the table before the doors even open, earning lifetime recognition, permanent foundation status, and a full money back guarantee after launch plus 40% incentive, eliminating risk while your upside remains limitless. Your five hundred thousand naira is fully protected, allows us to build the product, gives you a spot in this limited offer. You secure a position in a platform designed to elevate millions of businesses, shape entire markets, and expand globally. Years from now, when B23 stands tall, you will remember this moment as the instant you chose vision over hesitation. You have "nothing to lose". Relevance begins here. Legacy begins here.
+                    The future bows to those who act first. B23 is a rare force set to transform how businesses are seen across Africa and the world. As a pioneer, you do far more than participate, you become an original pillar of the platform, shaping its direction and riding the same early wave that carried Uber, Airbnb, and Canva before anyone knew their names. You claim your seat at the table before the doors even open, earning lifetime recognition, permanent foundation status, and a voice in the decisions that will define the platform’s growth.
+You secure a place in a movement designed to elevate millions of businesses, unlock untapped markets, and expand influence globally. Years from now, when B23 stands tall, you will remember this moment as the instant you chose vision over hesitation, influence over observation, and action over delay. Relevance begins here. Legacy begins here.
                 </p>
-                <a href="https://wa.me/+2348100322782" class="about-button">Don’t Watch. Make History</a>
+                <a href="https://wa.me/+2348100322782" class="about-button">Don't Watch. Make History</a>
             </div>
         </div>
     </section>
-    <!-- Investment Section -->
-    <section id="invest" class="investment-section">
-        <div class="section-header">
-            <h2>Become Our <span class="gradient-text">Business Partner</span></h2>
-            <p class="section-subtitle">Only A Few Exclusives, Then Its Gone Forever!</p>
-        </div>
-        
-        <div class="investment-tiers">
-    <div class="tier-card">
-        <div class="tier-header">
-            <h3>Bronze</h3>
-            <div class="tier-price">₦1,000,000</div>
-        </div>
-        <ul class="tier-benefits">
-            <li>SAFE conversion at extra 5% discount*</li>
-            <li>Potential lifetime ROI of up to ₦500k per month*</li>
-            <li>1.5x full repayment option</li>
-            <li>Exclusive Pioneer’s Badge, Certificate, Recognition and Spotlight</li>
-            <li>3 Months of Driving Businesses to your Platform, 10 - 20 per Month</li>
-        </ul>
-        <a href="https://paystack.shop/pay/5xlxfbp9rA" class="invest-now">Claim Now</a>
-        <small class="disclaimer">
-            *Conversion subject to final terms and approvals. Returns not guaranteed.
-        </small>
+    
+    <!-- SIMPLE PIONEER CARDS SECTION -->
+    <section class="pioneer-cards-section">
+        <div class="cards-container">
+            <div class="pioneer-header">
+                <h2 class="pioneer-main-title">Be Etched in History, Become a Pioneer</h2>
+                <p class="pioneer-subtitle">Claim your place at the forefront of tomorrow. Join the founding circle of a global platform set to redefine the way the world sees business.</p>
+            </div>
+            
+            <div class="cards-grid">
+                <!-- CARD 1: Vision & FOMO -->
+                <div class="pioneer-card-simple card-1-simple">
+                    <div class="card-icon-simple">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="card-title-simple">The Vision</h3>
+                    <p class="card-text-simple">Step into the future before the world even knows it exists. Become a founding force of a global, game-changing platform. History shows that early movers turn bold decisions into unimaginable value: Amazon in 1995, Tesla in 2004, Airbnb in 2008. B23 offers the same first-mover advantage with structural, financial, and global recognition for those who act now. As a B23 Pioneer, you contribute and join the business advisory board, shaping decisions, strategy, and direction alongside the founders. Your voice, your vision, and your input shape the future. Move first. Influence the future. Secure your legacy. The world will follow.</p>
+                </div>
+                
+                <!-- CARD 2: Legacy & Recognition -->
+                <div class="pioneer-card-simple card-2-simple">
+                    <div class="card-icon-simple">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3 class="card-title-simple">Your Name, Forever a Pioneer</h3>
+<p class="card-text-simple">
+  <strong>Permanent Legacy and Recognition:</strong> Your name will be recorded on public ledgers, platform milestones, and featured in media mentions, verifiable proof for resumes, investor decks, press releases, certificates, and badges.  
+  <strong>Global Advisory Influence:</strong> Your insights and guidance help shape B23’s growth and direction, giving you a seat at the table alongside the founding team.  
+  <strong>International Recognition:</strong> As B23 expands, your name will appear on official websites, press releases, and the pioneer registry. Each platform milestone compounds your status, ensuring that history remembers pioneers first.
+</p>
+
+                </div>
+                
+                <!-- CARD 3: Immediate Financial Upside -->
+                <div class="pioneer-card-simple card-3-simple">
+                    <div class="card-icon-simple">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="card-title-simple">Zero Risk On Your Commitment</h3>
+<p class="card-text-simple">
+  <strong>1. Guaranteed Refund and Returns:</strong> After six months, you are eligible for a full refund plus up to 50% returns on your commitment, ensuring a completely risk-free participation.  
+  <strong>2. Revenue Pool Sharing:</strong> Receive a proportional share of 35% of your category’s cash pool for four months, providing real rewards from the platform’s growth.  
+  <strong>3. SAFE Conversion Privileges:</strong> Additionally, you are eligible for up to 20% SAFE conversion discount should you choose to participate, turning your early support into long-term ownership.  
+
+Your early move carries zero risk and positions you to benefit as B23 expands and scales.
+</p>
+
+                </div>
+                
+                <!-- CARD 4: Business Elevation -->
+                <div class="pioneer-card-simple card-4-simple">
+                    <div class="card-icon-simple">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="card-title-simple">Your Business, Supercharged</h3>
+<p class="card-text-simple">
+  <strong>1. Exclusive Business Referrals:</strong> Gain 20 to 30 high-value referrals each month for the first three months, fueling immediate growth and expanding your reach.  
+  <strong>2. Strategic Founders’ Access:</strong> Participate in strategy sessions and collaborative planning with B23 founders and key partners, giving your business insights direct influence on platform decisions.  
+  <strong>3. Advisory Board Privileges:</strong> Shape B23’s direction, product rollouts, and partnerships as a founding board member. Your guidance directly impacts the platform’s trajectory and success.  
+
+Step forward and position your business to benefit structurally, immediately, and measurably, staying ahead of competitors as B23 scales.
+</p>
+
+                </div>
+                
+                <!-- CARD 5: Billion-Dollar Analogy -->
+                <div class="pioneer-card-simple card-5-simple">
+                    <div class="card-icon-simple">
+                        <i class="fas fa-flag-checkered"></i>
+                    </div>
+                    <h3 class="card-title-simple">Lifetime Global VIP Recognition</h3>
+<p class="card-text-simple">
+  <strong>1. VIP Invitations:</strong> Receive invitations to private global events, strategy sessions, and founder-led gatherings reserved only for B23 pioneers.  
+  <strong>2. Elite Global Recognition:</strong> Be acknowledged at international launches, milestone celebrations, and high-profile gatherings, marking your name permanently among the pioneers shaping B23.  
+  <strong>3. Permanent Pioneer Status:</strong> Your participation grants lasting recognition across all B23 events and platforms worldwide, ensuring your influence and contribution are celebrated indefinitely.  
+
+Step into a circle where your vision, presence, and insights are honored globally, forever.
+</p>
+
+                </div>
+
+
+                <!-- CARD 6: Bold Pioneers Only -->
+<div class="pioneer-card-simple card-6-simple">
+    <div class="card-icon-simple">
+        <i class="fas fa-globe"></i>
     </div>
-    <div class="tier-card featured">
-        <div class="tier-header">
-            <h3>Silver</h3>
-            <div class="tier-price">₦2,000,000</div>
-        </div>
-        <ul class="tier-benefits">
-            <li>SAFE conversion at extra 10% discount*</li>
-            <li>Potential lifetime ROI of up to ₦1.5m ($1,000) per month*</li>
-            <li>1.5x full repayment option</li>
-            <li>Exclusive Pioneer’s Badge, Certificate, Recognition and Spotlight</li>
-            <li>5 Months of Driving Businesses to your Platform, 30 - 40 per Month</li>
-        </ul>
-        <a href="https://paystack.shop/pay/39hpdfxifb" class="invest-now">Claim Now</a>
-        <div class="featured-badge">RECOMMENDED</div>
-        <small class="disclaimer">
-            *Conversion subject to final terms and approvals. Returns not guaranteed.
-        </small>
-    </div>
-    <div class="tier-card">
-        <div class="tier-header">
-            <h3>Gold</h3>
-            <div class="tier-price">₦3,000,000+</div>
-        </div>
-        <ul class="tier-benefits">
-            <li>SAFE conversion at extra 15% discount*</li>
-            <li>Potential lifetime ROI of up to ₦3m ($2,000) per month*</li>
-            <li>1.5x full repayment option</li>
-            <li>Exclusive Pioneer’s Badge, Certificate, Recognition and Spotlight</li>
-            <li>7 Months of Driving Businesses to your Platform, 40 - 50 per Month</li>
-        </ul>
-        <a href="https://paystack.shop/pay/0edekqg3-a" class="invest-now">Claim Now</a>
-        <small class="disclaimer">
-            *Conversion subject to final terms and approvals. Returns not guaranteed.
-        </small>
-    </div>
+    <h3 class="card-title-simple">Only the Bold Shape the Future</h3>
+    <p class="card-text-simple">
+      <strong>Elite Founding Circle:</strong> Only 20 pioneers worldwide will join this exclusive group, forever recognized as the original architects of B23.  
+      <strong>Global Influence:</strong> Your early action grants a permanent voice in guiding the platform’s growth, strategy, and global impact.  
+      <strong>Lifetime Prestige:</strong> Your decisive move today ensures your name is celebrated globally, marking you as a bold visionary whose influence shapes history.  
+
+      Step forward now. Those who act with courage define the future and leave a legacy that endures.
+    </p>
 </div>
 
-        
-        <div class="investment-cta">
-            <p>The Pioneers Program is strictly a "Fund Raiser Program" designed to help the project generate funds for building its product without any of the legal nuances and liabilities of taking investment. These packages are treated as a "purchase of future access and benefits" ONLY and do NOT represent investments or securities of any kind. Funds collected will be used solely to develop the company and its products. Buying now ONLY grants "privileges" explicitly stated in the "Terms & Conditions" page, subject to final terms, approvals, and applicable laws. NO financial returns or ownership rights are granted at this stage. By completing a purchase, you agree to our <a href="./terms.html" style="text-decoration: underline;">terms and conditions</a>.</p>
+            </div>
         </div>
     </section>
-
+    
+    <!-- FINAL CTA SECTION -->
+    <section class="final-cta-section">
+        <div class="final-cta-container">
+            <h2 class="final-cta-title">JOIN THE PIONEERS TODAY</h2>
+            <p class="final-cta-subtitle">History favors the bold. Step forward as one of 20 pioneers worldwide, claim your legacy, and shape a global revolution. Only those who act now will secure their place.</p>
+            <a href="https://wa.me/+2348100322782" class="final-cta-button"><span>Claim Your Seat</span></a>
+        </div>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script-one.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Original animations
             const elements = document.querySelectorAll('.hero-title, .glass-card');
             
             elements.forEach((el, index) => {
@@ -479,11 +699,27 @@
                     el.style.transform = 'translateY(0)';
                 }, index * 300);
             });
+            
             document.addEventListener('mousemove', (e) => {
                 const particles = document.querySelector('.particles');
-                const x = e.clientX / window.innerWidth;
-                const y = e.clientY / window.innerHeight;
-                particles.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
+                if (particles) {
+                    const x = e.clientX / window.innerWidth;
+                    const y = e.clientY / window.innerHeight;
+                    particles.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
+                }
+            });
+            
+            // Simple card animations
+            const cards = document.querySelectorAll('.pioneer-card-simple');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 500 + (index * 150));
             });
         });
     </script>
