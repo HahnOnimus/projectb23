@@ -1072,23 +1072,6 @@ a {
     transform: translateY(-100%);
 }
 
-.nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.nav-logo img {
-    height: 40px;
-    width: auto;
-    filter: drop-shadow(0 0 5px rgba(108, 99, 255, 0.5));
-    transition: all 0.3s ease;
-}
-
-.nav-logo:hover img {
-    transform: rotate(15deg) scale(1.1);
-    filter: drop-shadow(0 0 10px rgba(108, 99, 255, 0.8));
-}
 
 .nav-brand {
     font-size: 2rem;
@@ -1100,9 +1083,6 @@ a {
     transition: all 0.3s ease;
 }
 
-.nav-logo:hover .nav-brand {
-    text-shadow: 0 0 15px rgba(108, 99, 255, 0.5);
-}
 
 .nav-links {
     display: flex;
