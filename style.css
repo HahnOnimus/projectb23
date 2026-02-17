@@ -1083,6 +1083,18 @@ a {
     transition: all 0.3s ease;
 }
 
+/* Navbar brand container */
+.nav-brand-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-brand-container img {
+    height: 40px;
+    width: auto;
+    border-radius: 8px;
+}
 
 .nav-links {
     display: flex;
